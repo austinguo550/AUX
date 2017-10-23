@@ -1,8 +1,8 @@
-## AUX
+# AUX
 
-# A web application for friends to communally queue spotify songs
+## A web application for friends to communally queue spotify songs
 
-#How to run:
+## How to run:
 
 	git clone "repo link"
 	cd aux
