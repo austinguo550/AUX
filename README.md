@@ -8,3 +8,13 @@
 	cd aux
 	npm install
 	npm start
+
+## How we are going to develop:
+
+Never push to master.  Branch names should be in the form of: 
+	
+	initial/change worked on
+
+aka:
+
+	my/fix-nav-bar
