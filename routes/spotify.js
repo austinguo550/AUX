@@ -7,49 +7,27 @@ const spotify = {
 
 'use strict'
 
+var authOptions = {
+  url: 'https://accounts.spotify.com/api/token',
+  headers: {
+    'Authorization': 'Basic ' + (new Buffer(spotify.client_id + ':' + spotify.client_secret).toString('base64'))
+  },
+  form: {
+    grant_type: 'client_credentials'
+  },
+  json: true
+}
 
-// module.exports = function(topten, tags, callback){
-//     var increment = 0;
-//     for (var i = 0; i < topten.length; i++) {
-//       request({
-//               headers: {'ocp-apim-subscription-key': 'a4c7815f3c0f408b86991eb9c4e92fdb'},
-//               method: "POST",
-//               json: true,
-//               url: "https://westus.api.cognitive.microsoft.com/vision/v1.0/analyze?visualFeatures=Tags",
-//               body: {"url": topten[i].url}
-//           }, response.bind(topten[i]));
-//     }
+//token used in search req, etc
+var access_token;
 
-//     function response(e, r, body){
-//       //console.log(r);
-//         this.tags = body.tags;
-//         if(body.tags){
-//             body.tags.forEach(function(tag){
-//                 if (!tags.has(tag)){
-//                     tags.add(tag.name);
-//                 }
-//             })
-//         }
-//         increment++;
-//         if (increment === topten.length) {
-//           callback();
-//         }
-//     }
-// };
-
-router.use('/auth', function(req,res){
-  request({
-    method: "POST",
-    url: "https://accounts.spotify.com/api/token?grant_type=client_credentials",
-    headers: {
-      'Authorization': "Basic YTlmY2U3NjZiYzJiNGQ4NmFmNzI1ZmFkNzE5YzhmZTY6YmI2ZDI0YTg1YTM4NDE3Mzk1OTUzNGM0NjRhOTQ0YzU="
-    }
-  }, function(error, response) {
+//AUTHORIZE ON /SPOTIFY REQ
+//main purpose: place access token in global var
+router.use('/', function(req,res){
+  request.post(authOptions, function(error, response) {
     if (!error && response.statusCode == 200) {
-    //if no error
-
-    console.log(response);
-    res.send(response);
+      access_token = response.body.access_token;
+      console.log(access_token);
     }else{
       console.log("error", response.statusCode);
     }
