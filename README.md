@@ -13,7 +13,7 @@
 
 Never push to master.  Branch names should be in the form of: 
 	
-	dev's initials/change worked on
+	dev's initials-change worked on
 
 aka:
 
