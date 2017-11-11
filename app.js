@@ -8,6 +8,8 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var spotify = require('./routes/spotify');
+var login = require('./routes/login');
+// var callback = require('./routes/callback');
 
 var app = express();
 
@@ -26,6 +28,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 app.use('/spotify', spotify);
+app.use('/login', login);
+// app.use('/callback', callback);
+
+// setup directory to grab cookies
+app.use(express.static(__dirname + '/public'))
+   .use(cookieParser());
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
