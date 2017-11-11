@@ -23,7 +23,7 @@ var access_token;
 
 //AUTHORIZE ON /SPOTIFY REQ
 //main purpose: place access token in global var
-router.use('/', function(req,res){
+router.use('/', function(req, res){
   request.post(authOptions, function(error, response) {
     if (!error && response.statusCode == 200) {
       access_token = response.body.access_token;
