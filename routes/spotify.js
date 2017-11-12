@@ -72,8 +72,8 @@ router.use('/search/:trackName', function(req, res) {
         }
         result.push(object)
       })
-
-      res.send(result)
+      console.log(result)
+      res.send({array: result})
     }else{
       console.log("error", response.statusCode);
     }
