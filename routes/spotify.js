@@ -36,7 +36,7 @@ router.use('/auth', function(req, res){
   });
 })
 
-router.use('/search', function(req, res) {
+router.use('/search/:trackName', function(req, res) {
   request.get({
     url: 'https://api.spotify.com/v1/search',
     headers: {
@@ -45,7 +45,7 @@ router.use('/search', function(req, res) {
     },
     json: true,
     qs: {
-      q: 'frank ocean',
+      q: req.params.trackName,
       type: 'track',
       limit: '6',
     },
