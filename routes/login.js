@@ -5,7 +5,7 @@ var querystring = require('querystring');
 var router = express.Router();
 
 // Globals
-var redirect_uri = 'https://localhost:8080/callback';	// redirect response to /callback
+var redirect_uri = 'http://localhost:8080/callback';	// redirect response to /callback
 var scopes = 'user-read-private user-read-email';	// required for accessing private data
 const spotify = {
   client_id: "a9fce766bc2b4d86af725fad719c8fe6",
