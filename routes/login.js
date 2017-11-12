@@ -5,7 +5,7 @@ var querystring = require('querystring');
 var router = express.Router();
 
 // Globals
-var redirect_uri = 'callback';	// redirect response to /callback
+var redirect_uri = 'https://localhost:8080/callback';	// redirect response to /callback
 var scopes = 'user-read-private user-read-email';	// required for accessing private data
 const spotify = {
   client_id: "a9fce766bc2b4d86af725fad719c8fe6",
@@ -29,7 +29,8 @@ var generateRandomString = function(length) {
 };
 
 /* GET login page (authorization). */
-router.get('/login', function(req, res) {
+var loginRoute = function(req, res) {
+//router.use('/', function(req, res) {
 	console.log('login');
 	var state = generateRandomString(16);
 	res.cookie(stateKey, state);
@@ -40,7 +41,7 @@ router.get('/login', function(req, res) {
 	      response_type: 'code',
 	      redirect_uri: redirect_uri,
 	      scope: scopes,
-	      show_dialog: false,
+	      show_dialog: true,
 	      state: state
 	    }));
 
@@ -52,25 +53,38 @@ router.get('/login', function(req, res) {
 	// 	show_dialog: false,
 	// 	state: state
 	// }
+ //  var url = 'https://accounts.spotify.com/authorize?' +
+ //      querystring.stringify({
+ //        client_id: spotify.client_id,
+ //        response_type: 'code',
+ //        redirect_uri: redirect_uri,
+ //        scope: scopes,
+ //        show_dialog: true,
+ //        state: state
+ //      })
 
-	/* Need to redirect the response to a different URI: limitation of Spotify API */
+ //  console.log(url);
+
+	//  Need to redirect the response to a different URI: limitation of Spotify API 
 	// request.get({
-	// 	url: 'https://accounts.spotify.com/authorize?',
-	// 	qs: queryParams
+	// 	url: url
 	// }, function(error, response) {
 	//     if (!error && response.statusCode == 200) {
 	//       console.log('Successful login redirection');
+ //        res.redirect(url);
 	//     }else{
 	//       console.log("error", response.statusCode);
 	//     }
 	//   });
-	});
+};
 
 
 var stateKey = 'spotify_auth_state';
 
 /* Login response is rerouted here */
-router.get('/callback', function(req, res) {
+var callbackRoute = function(req, res) {
+//router.get('/callback', function(req, res) {
+  console.log("hit callback route");
 
   // your application requests refresh and access tokens
   // after checking the state parameter
@@ -139,7 +153,7 @@ router.get('/callback', function(req, res) {
       }
     });
   }
-});
+};
 
 
 router.get('/refresh_token', function(req, res) {
@@ -167,4 +181,8 @@ router.get('/refresh_token', function(req, res) {
 });
 
 
-module.exports = router;
+module.exports = {
+  router: router,
+  loginRoute: loginRoute,
+  callbackRoute: callbackRoute
+}
