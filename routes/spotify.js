@@ -28,22 +28,55 @@ router.use('/auth', function(req, res){
     if (!error && response.statusCode == 200) {
       access_token = response.body.access_token;
       console.log(access_token);
+      res.send(true)
     }else{
       console.log("error", response.statusCode);
+      res.send(false)
     }
   });
 })
 
 router.use('/search', function(req, res) {
   request.get({
-    url: 'https://api.spotify.com/v1/search?q=lil+uzi+vert&type=track&limit=5',
+    url: 'https://api.spotify.com/v1/search',
     headers: {
       'Authorization': 'Bearer ' + access_token,
       'Content-Type': 'application/json'
+    },
+    json: true,
+    qs: {
+      q: 'frank ocean',
+      type: 'track',
+      limit: '6',
+    },
+  }, function(error, response, body) {
+    if (!error && response.statusCode == 200) {
+      var items = body.tracks.items
+      var result = []
+
+      items.forEach((track)=>{
+        var artists = ""
+        var a_array = track.artists
+
+        a_array.forEach((artist)=>{
+          artists += artist.name + ", "
+        })
+
+        artists = artists.substring(0, artists.length -2)
+
+        var object = {
+          id: track.id,
+          name: track.name,
+          artists: artists,
+          display: track.name + ' - ' + artists,
+        }
+        result.push(object)
+      })
+
+      res.send(result)
+    }else{
+      console.log("error", response.statusCode);
     }
-  }, function(error, response) {
-    console.log(response.body);
-    res.send(response.body);
   })
 })
 
