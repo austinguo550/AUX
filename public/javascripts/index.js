@@ -23,7 +23,7 @@ function getClientCredentials(){
 }
 
 function displayResults(array){
-	//ToDo:  Mount to a mountpoint
+	//ToDo:  Mount results to a mountpoint
 	console.log(array)
 	array.forEach((entry) => {
 		displayName = entry.display;
