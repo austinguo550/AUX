@@ -21,6 +21,7 @@ aka:
 
 ## Actionables:
 
+'''
 ASAP
     - 1. Get MongoDB/Mongoose up and running - write a short how to on how each person can get it running on their computer
       or link youtube video
@@ -39,3 +40,4 @@ Next Steps (they rely on the ASAP shit)
 
 Next, Next Steps:
 	- 3. Implement Youtube API
+'''
