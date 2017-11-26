@@ -1,11 +1,11 @@
 # AUX
 
-## A web application for friends to communally queue spotify songs
+## A web application for friends to simultaneously queue spotify songs
 
 ## How to run:
 
 	git clone "repo link"
-	cd aux
+	cd AUX
 	npm install
 	npm start
 
@@ -40,4 +40,18 @@ Next Steps (they rely on the ASAP shit)
 
 Next, Next Steps:
 	- 3. Implement Youtube API
+```
+## NOTES:
+```
+Austin - MongoDB setup: 
+- mongoose is essentially a wrapper to use Mongo with Node easier
+- mongoose models allow us to add stuff to the database through (I think they create a collection for us and add objects to that collection?)
+- database in mongo 	= database in mysql
+- collection in mongo 	= table in mysql
+- document in mongo 	= whatever goes in tables in mysql
+
+References:
+https://www.tutorialspoint.com/mongodb/mongodb_overview.htm
+https://scotch.io/tutorials/using-mongoosejs-in-node-js-and-mongodb-applications
+https://www.youtube.com/watch?v=9OPP_1eAENg&list=PL4cUxeGkcC9jpvoYriLI0bY8DOgWZfi6u&index=1
 ```
