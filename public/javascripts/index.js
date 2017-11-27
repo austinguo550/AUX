@@ -74,10 +74,6 @@ function(){
         })
      });
 
-    // console.log(document.getElementsByClassName('song-row'));
-    // (document.getElementsByClassName('song-row')).forEach((songDiv) => {
-    // 	addEventListener('click', chooseSong(this));
-    // });
 }
 
 
