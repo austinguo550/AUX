@@ -1,6 +1,10 @@
 const spotifybase = "http://localhost:8080/spotify/"
 
 async function searchSpotify(text){
+	if (text == "") {
+		alert("please enter a query");
+		return []
+	}
 	const response = await fetch(spotifybase + 'search/' + text, {
 		method: 'get',
 		headers: {
@@ -15,7 +19,7 @@ function getClientCredentials(){
 	fetch(spotifybase + 'auth',{
 		method: 'post'
 	}).then(function(response) {
-		//dont really need to do anything
+		return;
 	}).catch(function(err) {
 		alert("this shit could NOT get authenticated")
 		console.log("error", err)
@@ -23,33 +27,57 @@ function getClientCredentials(){
 }
 
 function displayResults(array){
-	//ToDo:  Mount results to a mountpoint
-	console.log(array)
+	var mountpoint = document.getElementById('mountpoint');
+	mountpoint.innerHTML = "";
+
 	array.forEach((entry) => {
 		displayName = entry.display;
-		console.log(displayName)
+
+		var songDiv = document.createElement('div');
+		songDiv.className = "song-row";
+		songDiv.setAttribute('data-id', entry.id);
+
+		var songTitle = document.createElement('p');
+		songTitle.innerHTML = displayName;
+
+		songDiv.appendChild(songTitle);
+		songDiv.addEventListener('click', function(){
+			chooseSong(this);
+		});
+		mountpoint.appendChild(songDiv);
 	})
 }
 
-function chooseSong(){
-	//ToDo
+function chooseSong(song){
+	id = song.getAttribute('data-id');
+
+	if (id == "") {
+		alert("error with choosing song");
+	}
+
+	//TODO
+	//PASS SONG ID TO DB
 }
 
 
 window.onload =
-  function(){
+function(){
   	getClientCredentials();
     
-    document.getElementById('searchsongsbutton').addEventListener('click',
+    document.getElementById('search-button').addEventListener('click',
       function(){
-      	var text = document.getElementById('searchinput').value;
+      	var text = document.getElementById('search-input').value;
         text = text.replace(/\s/g, '+')
 
         searchSpotify(text).then((result) => {
         	displayResults(result)
         })
-      });
+     });
 
-    //TO DO: Add event listener for every tag that corelates to a song. 
-    //have it execute a function called chooseSong
-  };
+    // console.log(document.getElementsByClassName('song-row'));
+    // (document.getElementsByClassName('song-row')).forEach((songDiv) => {
+    // 	addEventListener('click', chooseSong(this));
+    // });
+}
+
+

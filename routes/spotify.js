@@ -18,16 +18,12 @@ var authOptions = {
   json: true
 }
 
-//token used in search req, etc
-var access_token;
 
 //AUTHORIZE ON /SPOTIFY REQ
 //main purpose: place access token in global var
 router.use('/auth', function(req, res){
   request.post(authOptions, function(error, response) {
     if (!error && response.statusCode == 200) {
-      access_token = response.body.access_token;
-      console.log(access_token);
       res.send(true)
     }else{
       console.log("error", response.statusCode);
@@ -39,8 +35,9 @@ router.use('/auth', function(req, res){
 router.use('/search/:trackName', function(req, res) {
   request.get({
     url: 'https://api.spotify.com/v1/search',
+    credentials: 'include',
     headers: {
-      'Authorization': 'Bearer ' + access_token,
+      // 'Authorization': 'Bearer ' + access_token,
       'Content-Type': 'application/json'
     },
     json: true,
@@ -72,7 +69,6 @@ router.use('/search/:trackName', function(req, res) {
         }
         result.push(object)
       })
-      console.log(result)
       res.send({array: result})
     }else{
       console.log("error", response.statusCode);

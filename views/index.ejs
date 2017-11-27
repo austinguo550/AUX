@@ -1,17 +1,10 @@
 <!DOCTYPE html>
-<!-- <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
-</html> -->
 
 <html>
-  <head>
+    <head>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/wingcss/0.1.9/wing.min.css">
+        <link rel="stylesheet" href="stylesheets/style.css">
+    </head>
 <body>
  <div>
     <div id="login">
@@ -22,9 +15,10 @@
     </div>
  </div>
 
-    <div id="testingdiv">
-        <input id = "searchinput" type="text">
-        <button id="searchsongsbutton"></button>
+    <div id="search-container">
+        <input id = "search-input" type="text">
+        <button id="search-button"></button>
+        <div id="mountpoint"></div>
     </div>
 
     <script src="/javascripts/index.js"></script>
