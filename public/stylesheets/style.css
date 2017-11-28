@@ -1,10 +1,32 @@
-#search-container {
-
+.input-container {
+	width: fit-content;
+	overflow: hidden;
+	flex: 8;
 }
 
-#search-input {
+.text-input {
 	width: 250px;
 }
 
 #search-button {
+}
+
+.flex-container {
+	display: flex;
+}
+
+.two-space {
+	flex: 2;
+}
+
+#outer-flex-container {
+	flex-direction: column;
+}
+
+#input-flex-container {
+	flex: 4;
+}
+
+#room-flex-cnotainer {
+	flex: 3;
 }
