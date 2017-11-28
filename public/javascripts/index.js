@@ -1,4 +1,6 @@
-const spotifybase = "http://localhost:8080/spotify/"
+const spotifybase = "http://localhost:8080/spotify/";
+const mongobase = "http://localhost:8080/mongo/";
+var roomID = "";
 
 async function searchSpotify(text){
 	if (text == "") {
@@ -10,7 +12,7 @@ async function searchSpotify(text){
 		headers: {
 			Accept: 'application/json',
 		},
-	 })
+	})
 	const json = await response.json()
 	return json.array
 }
@@ -48,18 +50,47 @@ function displayResults(array){
 	})
 }
 
-function chooseSong(song){
-	id = song.getAttribute('data-id');
-
-	if (id == "") {
+async function chooseSong(song){
+	songID = song.getAttribute('data-id');
+	if (songID == "") {
 		alert("error with choosing song");
+		return;
+	}
+	if (roomID == "") {
+		alert("no room code entered");
+		return;
 	}
 
-	console.log(id);
 
 	//TODO
 	//PASS SONG ID TO DB
+	try {
+      const response = await fetch(mongobase + "addSong", {
+        method: 'POST',
+        credentials: 'include',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+        	roomID: roomID,
+        	songID: songID,
+        })
+      });
+      const status = response.status;
+      if (status >= 200 && status < 300) {
+      	//no error
+        return {
+          err: false
+        }
+      }else{
+        console.log("error: ", status)
+      }
+    } catch(e) {
+      return {
+        err: e.message,
+      };
+    }
 }
+
+
 
 
 window.onload =
@@ -75,6 +106,13 @@ function(){
         	displayResults(result)
         })
      });
+    document.getElementById('roomID-button').addEventListener('click', 
+    	function(){
+    		var text = document.getElementById('roomID-input').value;
+    		text = text.toLowerCase();
+    		console.log(text);
+    		roomID = text;
+    	})
 
 }
 
