@@ -13,8 +13,9 @@ async function createRoom() {
 		if (status >= 200 && status < 300) {
 			//no error
 			console.log(response);
-			// json = await response.json()
-			// console.log(json)
+			console.log(response.body);
+			swag = await response.body.json()
+			console.log(swag)
 		}else{
 			console.log("error: ", status)
 		}

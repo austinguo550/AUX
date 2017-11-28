@@ -59,7 +59,7 @@ router.post('/createRoom', function(req, res){
 		if (err) {
 			console.log("err creating room:", err);
 		} else {
-			res.status(200).send("room created with ID: " + randomId);
+			res.status(200).send(randomId);
 		}
 	});
 })
