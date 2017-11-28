@@ -107,10 +107,12 @@ var callbackRoute = function(req, res) {
           console.log(body);
         });
 
+        /*
         console.log("hitting createRoom");
 
         mongo.createRoom("12345abcde");
         res.redirect('/');
+        */
 
         /* we can also pass the token to the browser to make requests from there
          ONLY DO SO WHEN access token expired */
