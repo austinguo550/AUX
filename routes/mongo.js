@@ -53,6 +53,8 @@ var createRoom = function(req, res) {
 	Room.create( { roomId: randomId }, function(err) {
 		if (err) {
 			console.log("err creating room:", err);
+		} else {
+			res.status(200).send("Success Creating Room");
 		}
 	});
 }
