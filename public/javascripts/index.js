@@ -124,11 +124,11 @@ function(){
       function(){
       	var text = document.getElementById('search-input').value;
         text = text.replace(/\s/g, '+')
-
         searchSpotify(text).then((result) => {
         	displayResults(result)
         })
      });
+
     document.getElementById('roomID-button').addEventListener('click', 
     	function(){
     		var text = document.getElementById('roomID-input').value;
@@ -136,7 +136,6 @@ function(){
     		console.log(text);
     		roomID = text;
     	})
-
 
 }
 

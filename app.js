@@ -9,7 +9,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var spotify = require('./routes/spotify');
 var login = require('./routes/login');
-var mongo = require('./routes/mongo');
+var mongoRoute = require('./routes/mongo');
 
 const mongoose = require('mongoose');
 
@@ -42,8 +42,10 @@ app.use('/users', users);
 app.use('/spotify', spotify);
 app.use('/login', login.loginRoute);
 app.use('/callback', login.callbackRoute);
-app.use('/mongo/addSong', mongo.addSong);
-app.use('/mongo/createRoom', mongo.createRoom);
+app.use('/mongo', mongoRoute);
+
+// app.use('/mongo/addSong', mongo.addSong);
+// app.use('/mongo/createRoom', mongo.createRoom);
 
 
 // setup directory to grab cookies
