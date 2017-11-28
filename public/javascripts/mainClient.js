@@ -11,11 +11,9 @@ async function createRoom() {
 	    });
 		const status = response.status;
 		if (status >= 200 && status < 300) {
-			//no error
-			console.log(response);
-			console.log(response.body);
-			swag = await response.body.json()
-			console.log(swag)
+			roomID = await response.text()
+
+			displayRoomID(roomID)
 		}else{
 			console.log("error: ", status)
 		}
@@ -25,10 +23,8 @@ async function createRoom() {
 }
 
 function displayRoomID(id) {
-	console.log(id);
+	document.getElementById('roomID-header').innerHTML = id;
 }
-
-
 
 document.getElementById('createRoom-button').addEventListener('click', 
 	function() {

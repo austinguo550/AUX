@@ -90,7 +90,6 @@ async function chooseSong(song){
     }
 }
 
-
 async function checkRoomExists(roomID) {
 
 	try {
@@ -112,9 +111,6 @@ async function checkRoomExists(roomID) {
       };
     }
 }
-
-
-
 
 window.onload =
 function(){
@@ -138,5 +134,3 @@ function(){
     	})
 
 }
-
-
