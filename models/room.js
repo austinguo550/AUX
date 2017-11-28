@@ -9,9 +9,7 @@ const roomSchema = new Schema({
     unique: true,
     required: true,
   },
-	queue: {
-    type: [String]
-  },
+	queue: [String],
 	createdAt: Date,
 	updatedAt: Date
 });
