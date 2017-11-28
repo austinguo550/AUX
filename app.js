@@ -25,21 +25,6 @@ mongoose.connection
     console.error('Mongoose/ Mongo connection error:', error)
   })
 
-/*
-Mongoose code
-*/
-// const mongoose = require('mongoose');
-
-// // ES6 Promises
-// mongoose.Promise = global.Promise;
-
-// // connect to mongodb
-// var db = mongoose.createConnection('localhost', 'test');
-// db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-
-// guarantee connection to the db before performing any action
-
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -59,6 +44,7 @@ app.use('/login', login.loginRoute);
 app.use('/callback', login.callbackRoute);
 app.use('/mongo/addSong', mongo.addSong);
 app.use('/mongo/createRoom', mongo.createRoom);
+
 
 // setup directory to grab cookies
 app.use(express.static(__dirname + '/public'))

@@ -127,6 +127,8 @@ var callbackRoute = function(req, res) {
           }));
       }
     });
+
+    res.redirect('/');  // when completed with sending through callback, send back to home page
   }
 };
 
