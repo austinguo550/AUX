@@ -1,6 +1,8 @@
 var Room = require('../models/room');
+var express = require('express');
+var router = express.Router();
 
-var addSong = function(req, res) {
+router.post('/addSong', function(req, res){
 	var roomId = req.body.roomID;
 	var songId = req.body.songID;
 
@@ -31,57 +33,42 @@ var addSong = function(req, res) {
 		}
 	})
 	res.send("Success");
-}
+})
 
-//<<<<<<< HEAD
-// var createRoom = function(req, res) {
-// 	Room.create( { roomId: req.body.roomId }, function(err) {
-// 		if(err) {
-// 			console.log("err creating room:", err);
-// 		}
-// 	});
-// 	res.send("success");
-// }
+router.post('/createRoom', function(req, res){
+	console.log("in backend")
+	appears = 1;
+	randomId = createRandomID();
+	// while (appears != 0) {
+	// 	console.log("counting rooms");
+	// 	Room.count( { roomId: randomId }, function(err, count) {
+	// 		if (err) {
+	// 			console.log("err: ", err);
+	// 		}
+	// 		console.log(count)
+	// 		if (count == 0) {
+	// 			appears = 0;
+	// 		}else{
+	// 			randomId = createRandomID();
+	// 		}
+	// 	});
+	// }
+	// console.log("abt to create Room")
 
-var createRoom = function(roomId) {
-	Room.create( { roomId: roomId }, function(err) {
-		if(err) {
+	Room.create( { roomId: randomId }, function(err) {
+		if (err) {
 			console.log("err creating room:", err);
 		} else {
-			res.status(200).send("Success Creating Room");
+			res.status(200).send("room created with ID: " + randomId);
 		}
-	})
-}
-// =======
-// var createRoom = function(req, res) {
-// 	// TODO::::::
-// 	// randomly create a Room ID -> roomId
+	});
+})
 
-// 	// then, check if the id is already in the collection
-// 	appears = 1;
-// 	randomId = "";
-// 	while (count != 0) {
-// 		Room.count( { roomId: randomId }, function(err, count) {
-// 			if (err) {
-// 				console.log("err: ", err);
-// 			}
-// 			if (count == 0) {
-// 				appears = 0;
-// 			}
-// 		});
-// 	}
 
-// 	Room.create( { roomId: randomId }, function(err) {
-// 		if (err) {
-// 			console.log("err creating room:", err);
-// 		}
-// 	});
-// }
-
-function createReadID() {
+function createRandomID() {
 	var possible = "abcdefghijklmnopqrstuvwxyz0123456789";
 	var randomId = "";
-	for (var i = 0; i < 5; i++)
+	for (var i = 0; i < 6; i++)
 		randomId += possible.charAt(Math.floor(Math.random() * possible.length));
 	return randomId;
 }
@@ -103,7 +90,6 @@ var getSongs = function(req,res) {
 				{roomid: roomID}, 
 				{ $push: {queue: [] } });
 		}
->>>>>>> faa971d21c1304d5483afcc5ec0390775951d009
 	});
 }
 
@@ -116,9 +102,4 @@ var checkRoomExists = function(roomID) {
 }
 
 
-module.exports = {
-	addSong: addSong,
-	createRoom: createRoom,
-	// getSongs: getSongs,
-	checkRoomExists: checkRoomExists
-}
+module.exports = router;
