@@ -47,6 +47,8 @@ var createRoom = function(roomId) {
 	Room.create( { roomId: roomId }, function(err) {
 		if(err) {
 			console.log("err creating room:", err);
+		} else {
+			res.status(200).send("Success Creating Room");
 		}
 	})
 }
