@@ -57,6 +57,7 @@ function chooseSong(song){
 
 	//TODO
 	//PASS SONG ID TO DB
+	console.log(id);
 }
 
 
