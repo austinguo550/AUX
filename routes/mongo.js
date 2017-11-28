@@ -39,12 +39,24 @@ var addSong = function(req, res) {
 	res.send("Success");
 }
 
-var createRoom = function(req, res) {
+// var createRoom = function(req, res) {
+// 	Room.create( { roomId: req.body.roomId }, function(err) {
+// 		if(err) {
+// 			console.log("err creating room:", err);
+// 		}
+// 	});
+// 	res.send("success");
+// }
+
+var createRoom = function(roomId) {
 	Room.create( { roomId: roomId }, function(err) {
-		console.log("err creating room:", err);
+		if(err) {
+			console.log("err creating room:", err);
+		}
 	});
 }
 
 module.exports = {
-	addSong: addSong
+	addSong: addSong,
+	createRoom: createRoom
 }

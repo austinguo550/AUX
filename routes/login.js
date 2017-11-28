@@ -4,6 +4,8 @@ var querystring = require('querystring');
 
 var router = express.Router();
 
+var mongo = require('./mongo');
+
 // Globals
 var redirect_uri = 'http://localhost:8080/callback';	// redirect response to /callback
 var scopes = 'user-read-private user-read-email';	// required for accessing private data
@@ -104,6 +106,19 @@ var callbackRoute = function(req, res) {
         request.get(options, function(error, response, body) {
           console.log(body);
         });
+
+        console.log("hitting createRoom");
+        // var roomOpts = {
+        //   url: '/mongo/createRoom',
+        //   form: {
+        //     roomId: "12345abcde"
+        //   }
+        // }
+        // request.post(roomOpts, function(error, response, body) {
+        //   console.log(body);
+        // })
+        mongo.createRoom("12345abcde");
+        res.redirect('/');
 
         /* we can also pass the token to the browser to make requests from there
          ONLY DO SO WHEN access token expired */
