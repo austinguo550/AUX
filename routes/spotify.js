@@ -10,7 +10,8 @@ const spotify = {
 var authOptions = {
   url: 'https://accounts.spotify.com/api/token',
   headers: {
-    'Authorization': 'Basic ' + (new Buffer(spotify.client_id + ':' + spotify.client_secret).toString('base64'))
+    'Authorization': 'Basic ' + (new Buffer(spotify.client_id + ':' + spotify.client_secret).toString('base64')),
+    'Content-Type': 'application/json',
   },
   form: {
     grant_type: 'client_credentials'
@@ -18,12 +19,14 @@ var authOptions = {
   json: true
 }
 
+var access_token = "";
 
 //AUTHORIZE ON /SPOTIFY REQ
 //main purpose: place access token in global var
 router.use('/auth', function(req, res){
   request.post(authOptions, function(error, response) {
     if (!error && response.statusCode == 200) {
+      access_token = response.body.access_token;
       res.send(true)
     }else{
       console.log("error", response.statusCode);
@@ -35,9 +38,8 @@ router.use('/auth', function(req, res){
 router.use('/search/:trackName', function(req, res) {
   request.get({
     url: 'https://api.spotify.com/v1/search',
-    credentials: 'include',
     headers: {
-      // 'Authorization': 'Bearer ' + access_token,
+      'Authorization': 'Bearer ' + access_token,
       'Content-Type': 'application/json'
     },
     json: true,
