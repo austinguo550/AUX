@@ -11,7 +11,19 @@ var spotify = require('./routes/spotify');
 var login = require('./routes/login');
 var mongo = require('./routes/mongo');
 
+const mongoose = require('mongoose');
+
 var app = express();
+
+var Room = require('./models/room');
+mongoose.connect('mongodb://localhost/test');
+mongoose.connection
+  .once('open', function () {
+    console.log('Mongoose successfully connected to Mongo')
+  })
+  .on('error', function (error) {
+    console.error('Mongoose/ Mongo connection error:', error)
+  })
 
 /*
 Mongoose code
@@ -45,7 +57,7 @@ app.use('/users', users);
 app.use('/spotify', spotify);
 app.use('/login', login.loginRoute);
 app.use('/callback', login.callbackRoute);
-app.use('/mongo', mongo);
+app.use('/mongo/addSong', mongo.addSong);
 
 // setup directory to grab cookies
 app.use(express.static(__dirname + '/public'))
