@@ -12,6 +12,8 @@ var addSong = function(req, res) {
 				function(err) {
 					if (err) {
 						console.log("err: ", err);
+					}else {
+						res.status(200).send("Updated");
 					}
 				}
 			)
@@ -23,28 +25,78 @@ var addSong = function(req, res) {
 			})
 		}
 		else {
-			// Room.create( { roomId: roomId }, function(err) {
-			// 	console.log("err creating room:", err);
-			// });
-			// Room.findOneAndUpdate( { roomId: roomId },
-			// 	{$push: {'queue': songId}},
-			// 	function(err) {
-			// 		if (err) {
-			// 			console.log("err: ", err);
-			// 		}
-			// 	}
-			// )
+			console.log("No room with that ID");
+			res.status(400).send("No room with that ID found");
 		}
 	})
 	res.send("Success");
 }
 
 var createRoom = function(req, res) {
-	Room.create( { roomId: roomId }, function(err) {
-		console.log("err creating room:", err);
+	// TODO::::::
+	// randomly create a Room ID -> roomId
+
+	// then, check if the id is already in the collection
+	appears = 1;
+	randomId = "";
+	while (count != 0) {
+		Room.count( { roomId: randomId }, function(err, count) {
+			if (err) {
+				console.log("err: ", err);
+			}
+			if (count == 0) {
+				appears = 0;
+			}
+		});
+	}
+
+	Room.create( { roomId: randomId }, function(err) {
+		if (err) {
+			console.log("err creating room:", err);
+		}
 	});
 }
 
+function createReadID() {
+	var possible = "abcdefghijklmnopqrstuvwxyz0123456789";
+	var randomId = "";
+	for (var i = 0; i < 5; i++)
+		randomId += possible.charAt(Math.floor(Math.random() * possible.length));
+	return randomId;
+}
+
+/*
+var getSongs = function(req,res) {
+	var roomID = req.roomID;
+
+	Room.findOne({roomId: roomID}, function(err, room) {
+		if (err) {
+			res.status(400).send('Bad Request');
+		} else {
+
+			songs = room.queue;
+			console.log(songs);
+			
+			res.status(200).send(songs);
+			Room.update(
+				{roomid: roomID}, 
+				{ $push: {queue: [] } });
+		}
+	});
+}
+
+*/
+
+var checkRoomExists = function(roomID) {
+	//check if room id exists
+
+	//aka check if 
+}
+
+
 module.exports = {
-	addSong: addSong
+	addSong: addSong,
+	createRoom: createRoom,
+	// getSongs: getSongs,
+	checkRoomExists: checkRoomExists,
 }
