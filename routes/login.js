@@ -108,15 +108,7 @@ var callbackRoute = function(req, res) {
         });
 
         console.log("hitting createRoom");
-        // var roomOpts = {
-        //   url: '/mongo/createRoom',
-        //   form: {
-        //     roomId: "12345abcde"
-        //   }
-        // }
-        // request.post(roomOpts, function(error, response, body) {
-        //   console.log(body);
-        // })
+
         mongo.createRoom("12345abcde");
         res.redirect('/');
 

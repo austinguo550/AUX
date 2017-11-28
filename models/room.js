@@ -11,7 +11,7 @@ const roomSchema = new Schema({
   },
 	queue: [String],
 	createdAt: Date,
-	updatedAt: Date
+	updatedAt: Date,
 });
 
 // on every save, add the date

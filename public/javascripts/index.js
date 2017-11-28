@@ -91,6 +91,29 @@ async function chooseSong(song){
 }
 
 
+async function checkRoomExists(roomID) {
+
+	try {
+      	const response = await fetch(mongobase + "checkRoomExists", {
+        method: 'GET',
+        credentials: 'include',
+        headers: { "Content-Type": "application/json" },
+      });
+      const status = response.status;
+      if (status >= 200 && status < 300) {
+      	//no error
+      	console.log("success")
+      }else{
+        console.log("error: ", status)
+      }
+    } catch(e) {
+      return {
+        err: e.message,
+      };
+    }
+}
+
+
 
 
 window.onload =
@@ -113,6 +136,7 @@ function(){
     		console.log(text);
     		roomID = text;
     	})
+
 
 }
 
