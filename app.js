@@ -9,29 +9,21 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var spotify = require('./routes/spotify');
 var login = require('./routes/login');
+var mongo = require('./routes/mongo');
+
+const mongoose = require('mongoose');
 
 var app = express();
 
-
-/*
-Mongoose code
-*/
-const mongoose = require('mongoose');
-
-// ES6 Promises
-mongoose.Promise = global.Promise;
-
-// connect to mongodb
-var db = mongoose.createConnection('localhost', 'test');
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-
-// guarantee connection to the db before performing any action
-/*  Before function currently doesn't work: ReferenceError: before is not defined
-    at Object.<anonymous> (/Users/austinguo550/Documents/Projects/AUX/app.js:25:1)
-
-before(function(done) {
-  
-}); */
+var Room = require('./models/room');
+mongoose.connect('mongodb://localhost/test');
+mongoose.connection
+  .once('open', function () {
+    console.log('Mongoose successfully connected to Mongo')
+  })
+  .on('error', function (error) {
+    console.error('Mongoose/ Mongo connection error:', error)
+  })
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -50,6 +42,9 @@ app.use('/users', users);
 app.use('/spotify', spotify);
 app.use('/login', login.loginRoute);
 app.use('/callback', login.callbackRoute);
+app.use('/mongo/addSong', mongo.addSong);
+app.use('/mongo/createRoom', mongo.createRoom);
+
 
 // setup directory to grab cookies
 app.use(express.static(__dirname + '/public'))

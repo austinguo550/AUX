@@ -3,10 +3,15 @@ const Schema = mongoose.Schema;
 
 // create a schema
 const roomSchema = new Schema({
-	roomId: String,
-	queue: Array,
+	roomId: {
+    type: String,
+    index: true,
+    unique: true,
+    required: true,
+  },
+	queue: [String],
 	createdAt: Date,
-	updatedAt: Date
+	updatedAt: Date,
 });
 
 // on every save, add the date
