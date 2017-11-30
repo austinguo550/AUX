@@ -175,7 +175,7 @@ async function createPlaylist() {
 }
 
 async function addSongsToPlaylist(songs) {
-	for(int i = 0; i < songs.length; i++) {
+	for(var i = 0; i < songs.length; i++) {
 		songs[i] = "spotify:track:" + songs[i]
 	}
 
