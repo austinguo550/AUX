@@ -76,6 +76,6 @@ router.use('/search/:trackName', function(req, res) {
       console.log("error", response.statusCode);
     }
   })
-})
+});
 
 module.exports = router;

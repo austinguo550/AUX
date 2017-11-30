@@ -43,8 +43,17 @@ router.post('/addSong', function(req, res){
 
 router.post('/createRoom', function(req, res){
 
+	function createRandomID() {
+		var possible = "abcdefghijklmnopqrstuvwxyz0123456789";
+		var randomId = "";
+		for (var i = 0; i < 6; i++)
+			randomId += possible.charAt(Math.floor(Math.random() * possible.length));
+		return randomId;
+	}
+
 	function findUsableRoomID() {
 		randomId = createRandomID();
+		var ownerId = createRandomID();
 
 		Room.count( { roomId: randomId }, function(err, count) {
 			if (err) {
@@ -52,11 +61,11 @@ router.post('/createRoom', function(req, res){
 			}
 
 			if (count == 0) {
-				Room.create( { roomId: randomId }, function(err) {
+				Room.create( { roomId: randomId, owner: ownerId }, function(err) {
 					if (err) {
 						res.status(500).end();
 					} else {
-						res.status(200).end(randomId);
+						res.status(200).end(randomId + "," + ownerId);
 					}
 				});
 			}else{
@@ -68,17 +77,6 @@ router.post('/createRoom', function(req, res){
 	findUsableRoomID();
 
 })
-
-
-
-
-function createRandomID() {
-	var possible = "abcdefghijklmnopqrstuvwxyz0123456789";
-	var randomId = "";
-	for (var i = 0; i < 6; i++)
-		randomId += possible.charAt(Math.floor(Math.random() * possible.length));
-	return randomId;
-}
 
 
 router.post("/getSongs", function(req,res) {
@@ -107,11 +105,19 @@ router.post("/getSongs", function(req,res) {
 
 
 
-var checkRoomExists = function(roomID) {
-	//check if room id exists
+router.get('/checkRoomExists/:roomID', function(req, res) {
+	roomID = req.params.roomID;
 
-	//aka check if 
-}
+	Room.count( { roomId: roomID }, function(err, count) {
+		console.log(count);
+		if(count > 0) {
+			res.status(200).end("Room Found");
+		}
+		else {
+			res.status(404).end("No room with that ID found");
+		}
+	})
+})
 
 
 module.exports = router;
