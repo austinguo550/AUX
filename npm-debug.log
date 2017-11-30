@@ -9,7 +9,7 @@
 6 silly lifecycle aux@0.0.0~prestart: no script for prestart, continuing
 7 info lifecycle aux@0.0.0~start: aux@0.0.0
 8 verbose lifecycle aux@0.0.0~start: unsafe-perm in lifecycle true
-9 verbose lifecycle aux@0.0.0~start: PATH: /Users/michaelyu/.nvm/versions/node/v6.2.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/michaelyu/src/M117/aux/node_modules/.bin:/Users/michaelyu/.nvm/versions/node/v6.2.1/bin:/Library/Frameworks/Python.framework/Versions/3.6/bin:/Users/michaelyu/.nvm/versions/node/v6.2.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Users/michaelyu/.rvm/bin
+9 verbose lifecycle aux@0.0.0~start: PATH: /Users/michaelyu/.nvm/versions/node/v6.2.1/lib/node_modules/npm/bin/node-gyp-bin:/Users/michaelyu/src/M117/aux/node_modules/.bin:/Users/michaelyu/.nvm/versions/node/v6.2.1/bin:/Users/michaelyu/.rvm/gems/ruby-2.3.1/bin:/Users/michaelyu/.rvm/gems/ruby-2.3.1@global/bin:/Users/michaelyu/.rvm/rubies/ruby-2.3.1/bin:/Library/Frameworks/Python.framework/Versions/3.6/bin:/Users/michaelyu/.nvm/versions/node/v6.2.1/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Users/michaelyu/.rvm/bin
 10 verbose lifecycle aux@0.0.0~start: CWD: /Users/michaelyu/src/M117/aux
 11 silly lifecycle aux@0.0.0~start: Args: [ '-c', 'node ./bin/www' ]
 12 silly lifecycle aux@0.0.0~start: Returned: code: 1  signal: null
