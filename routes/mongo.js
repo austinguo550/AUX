@@ -4,35 +4,49 @@ var router = express.Router();
 
 router.post('/addSong', function(req, res){
 	var roomId = req.body.roomID;
-	var songId = req.body.songID;
+	var incomingSongID = req.body.songID;
 
 	Room.count( { roomId: roomId }, function(err, count) {
-		console.log(count);
+		inQueue = false;
 		if(count > 0) {
-			Room.findOneAndUpdate( { roomId: roomId },
-				{$push: {'queue': songId}},
-				function(err) {
-					if (err) {
-						console.log("err: ", err);
-					}else {
-						//res.status(200).send("Updated");
-						console.log("updated");
-					}
-				}
-			)
 			Room.findOne( { roomId: roomId } ).then(function(room) {
-				console.log("queue len: ", room.queue.length);
-				room.queue.forEach( (song) => {
-					console.log("song id: ", song);
+				room.queue.forEach( (songID) => {
+					if(songID == incomingSongID) {
+						res.status(202).end("Song Already in Queue");
+						inQueue = true;
+						return;
+					}
 				});
+				if (inQueue) {
+					console.log("inquee true")
+				}else {
+					console.log("inqueue false");
+				}
+				if (inQueue == false) {
+					console.log("swag");
+					Room.findOneAndUpdate( { roomId: roomId },
+						{$push: {'queue': incomingSongID}},
+						function(err) {
+							console.log(err);
+							if (err) {
+								console.log("err: ", err);
+								res.status(501).end("internal server error");
+								return;
+							}else {
+								res.status(200).end("Updated");
+								return;
+							}
+						}
+					)
+					console.log('function complete');
+				}				
 			})
 		}
 		else {
-			console.log("No room with that ID");
-			res.status(400).send("No room with that ID found");
+			res.status(400).end("Room ID not Found");
+			return;
 		}
 	})
-	res.send("Success");
 })
 
 router.post('/createRoom', function(req, res){

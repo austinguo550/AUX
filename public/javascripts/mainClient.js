@@ -1,5 +1,3 @@
-	// const mongobase = "http://localhost:8080/mongo/";
-
 async function createRoom() {
 	// TODO:
 	// check if user logged in

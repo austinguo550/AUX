@@ -31,12 +31,13 @@ function getClientCredentials(){
 function displayResults(array){
 	var mountpoint = document.getElementById('mountpoint');
 	mountpoint.innerHTML = "";
+	mountpoint.className = mountpoint.className + " border";
 
 	array.forEach((entry) => {
 		displayName = entry.display;
 
-		var songDiv = document.createElement('div');
-		songDiv.className = "song-row";
+		var songDiv = document.createElement('li');
+		songDiv.className = "song-item";
 		songDiv.setAttribute('data-id', entry.id);
 
 		var songTitle = document.createElement('p');
@@ -52,6 +53,7 @@ function displayResults(array){
 
 async function chooseSong(song){
 	songID = song.getAttribute('data-id');
+
 	if (songID == "") {
 		alert("error with choosing song");
 		return;
@@ -61,9 +63,8 @@ async function chooseSong(song){
 		return;
 	}
 
+	document.getElementById('search-input').innerHTML = song.childNodes[0].innerHTML;
 
-	//TODO
-	//PASS SONG ID TO DB
 	try {
       const response = await fetch(mongobase + "addSong", {
         method: 'POST',
@@ -75,13 +76,12 @@ async function chooseSong(song){
         })
       });
       const status = response.status;
+      const text = await response.text()
       if (status >= 200 && status < 300) {
-      	//no error
-        return {
-          err: false
-        }
+      	console.log(text);
+      	return;
       }else{
-        console.log("error: ", status)
+        console.log("error: ", text)
       }
     } catch(e) {
       return {
