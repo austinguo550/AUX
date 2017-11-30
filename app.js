@@ -40,8 +40,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 app.use('/spotify', spotify);
-app.use('/login', login.loginRoute);
-app.use('/callback', login.callbackRoute);
+app.use('/login', login);
 app.use('/mongo', mongoRoute);
 
 

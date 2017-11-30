@@ -7,12 +7,14 @@ var router = express.Router();
 var mongo = require('./mongo');
 
 // Globals
-var redirect_uri = 'http://localhost:8080/callback';	// redirect response to /callback
+var redirect_uri = 'http://localhost:8080/login/callback';	// redirect response to /callback
 var scopes = 'user-read-private user-read-email';	// required for accessing private data
 const spotify = {
   client_id: "a9fce766bc2b4d86af725fad719c8fe6",
   client_secret: "bb6d24a85a384173959534c464a944c5"
 }
+var stateKey = 'spotify_auth_state';
+
 // auth options needs to be updated every call, cannot be global
 
 /**
@@ -31,7 +33,9 @@ var generateRandomString = function(length) {
 };
 
 /* GET login page (authorization). */
-var loginRoute = function(req, res) {
+
+router.get('/start', function(req,res) {
+// var loginRoute = function(req, res) {
 	console.log('login');
 	var state = generateRandomString(16);
 	res.cookie(stateKey, state);
@@ -46,14 +50,13 @@ var loginRoute = function(req, res) {
 	      show_dialog: true,
 	      state: state
 	    }));
-};
+});
 
 
-var stateKey = 'spotify_auth_state';
 
 /* Login response is rerouted here */
-var callbackRoute = function(req, res) {
-//router.get('/callback', function(req, res) {
+// var callbackRoute = function(req, res) {
+router.get('/callback', function(req, res) {
   console.log("hit callback route");
 
   // your application requests refresh and access tokens
@@ -132,7 +135,7 @@ var callbackRoute = function(req, res) {
 
     res.redirect('/');  // when completed with sending through callback, send back to home page
   }
-};
+});
 
 
 /* When we decide to include refresh token information */
@@ -161,8 +164,4 @@ router.get('/refresh_token', function(req, res) {
 });
 
 
-module.exports = {
-  router: router,
-  loginRoute: loginRoute,
-  callbackRoute: callbackRoute
-}
+module.exports = router;
