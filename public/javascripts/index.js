@@ -1,6 +1,9 @@
 const spotifybase = "http://localhost:8080/spotify/";
 const mongobase = "http://localhost:8080/mongo/";
 var roomID = "";
+var token = "";
+var userID = "";
+var playlistID = "";
 
 async function searchSpotify(text){
 	if (text == "") {
@@ -109,6 +112,87 @@ async function checkRoomExists(roomID) {
       };
     }
 }
+
+async function addSongsToSpotifyPlaylist() {
+	try {
+		const response = await fetch(mongobase + "getSongs", {
+			method: 'POST',
+			credentials: 'include',
+        	headers: { "Content-Type": "application/json" },
+        	body: JSON.stringify({
+	        	roomID: roomID
+	        })
+		});
+		const status = response.status;
+		if (status >= 200 && status < 300) {
+			var json = await response.json()
+			console.log(json.songs)
+
+			//CALLS TO SPOTIFY PLAYLIST
+
+			//check if playlist created already ?
+			if(playlistID == "") {
+				//add to playlist
+				addSongsToPlayist(json.songs);
+			}
+
+			else {
+				//create playlist
+				createPlaylist();
+			}
+
+
+
+		}else{
+			console.log("error: ", status)
+		}
+	} catch(e) {
+		console.log("Error: " , e);
+	}
+}
+
+async function createPlaylist() {
+	var playlist_url = "https://api.spotify.com/v1/users/" + userID + "/playlists";
+	const create_response = await fetch(playlist_url, {
+		method: 'POST',
+		credentials: 'include',
+		headers: {
+			'Accept': "application/json",
+			'Content-Type': "application/json",
+			'Authorization': "Bearer " + token
+		},
+		body: JSON.stringify({
+			"description": "AUX app playlist",
+			"public": false,
+			"name": "AUX App"
+		})
+	})
+
+	var playlist_json = await create_response.json();
+	playlistID = playlist_json.id;
+
+	console.log("create playlist response status code: " + create_response.status);
+}
+
+async function addSongsToPlaylist(songs) {
+	for(int i = 0; i < songs.length; i++) {
+		songs[i] = "spotify:track:" + songs[i]
+	}
+
+	var songs_string = songs.join();
+	var playlist_url = "https://api.spotify.com/v1/users/" + userID + "/playlists/" + playlistID + "/tracks/uris=" + songs_string;
+	const add_response = await fetch(playlist_url, {
+		method: 'POST',
+		credentials: 'include',
+		headers: {
+			'Content-Type': "application/json",
+			'Authorization': "Bearer " + token
+		}
+	})
+
+	console.log("add to playlist response status code: " + add_response.status);
+}
+
 
 window.onload =
 function(){
