@@ -1,3 +1,5 @@
+var ownerID = ""
+
 async function createRoom() {
 	// TODO:
 	// check if user logged in
@@ -9,7 +11,8 @@ async function createRoom() {
 	    });
 		const status = response.status;
 		if (status >= 200 && status < 300) {
-			roomID = await response.text()
+			roomID = await response.text().randomId
+			ownerID = await response.text().ownerId
 
 			displayRoomID(roomID)
 		}else{
