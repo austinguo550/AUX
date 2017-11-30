@@ -53,6 +53,7 @@ router.post('/createRoom', function(req, res){
 
 	function findUsableRoomID() {
 		randomId = createRandomID();
+		ownerId = createRandomID();
 
 		Room.count( { roomId: randomId }, function(err, count) {
 			if (err) {
@@ -60,11 +61,11 @@ router.post('/createRoom', function(req, res){
 			}
 
 			if (count == 0) {
-				Room.create( { roomId: randomId }, function(err) {
+				Room.create( { roomId: randomId, owner: ownerId }, function(err) {
 					if (err) {
 						res.status(500).end();
 					} else {
-						res.status(200).end(randomId);
+						res.status(200).end({randomId, ownerId});
 					}
 				});
 			}else{
