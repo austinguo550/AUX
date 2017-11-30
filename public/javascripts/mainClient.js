@@ -82,6 +82,8 @@ if (error) {
 } else {
   if (access_token) {
     // render oauth info
+    ACCESS_TOKEN = access_token;
+
     oauthPlaceholder.innerHTML = oauthTemplate({
       access_token: access_token,
       refresh_token: refresh_token
@@ -132,3 +134,9 @@ document.getElementById('createRoom-button').addEventListener('click',
 		console.log("swag")
 		createRoom();
 	})
+
+document.getElementById('getaccess').addEventListener('click', 
+  function() {
+    console.log("swiggity")
+    completeLogin();
+  })
