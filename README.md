@@ -26,25 +26,14 @@ aka:
 			- Henry & Jeffrey
 
 	- 1. Req to create and req to update playlist
-			- Austin
+			- WILL
 	- 1. Req to start playing playlist
-
-    - 2. set up get backend function to give songs to our DB
-    		- Michael
-
+			- WILL
 	- 2. create a timer for a front-end fetch req to fetch songs from our db
-```
-
-## Completed:
-
-```
-    - 1. Get MongoDB/Mongoose up and running - write a short how to on how each person can get it running on their computer
-
-	- 1. Display Songs
-
-Next Steps (they rely on the ASAP shit)
-    - 2. Write function to post to DB from songs
-    		- Michael
+			- WILL
+	- 2. When user creates a room, randomly create a unique "owner ID".  This will be passed into the get Songs function to ensure the only person "getting songs" is the owner of the Room.
+		Assume everyone can make rooms for this function ATM.
+		 	- AUSTIN
 ```
 
 ## NOTES:
