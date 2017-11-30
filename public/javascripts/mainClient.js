@@ -11,8 +11,11 @@ async function createRoom() {
 	    });
 		const status = response.status;
 		if (status >= 200 && status < 300) {
-			roomID = await response.text().randomId
-			ownerID = await response.text().ownerId
+			let res_text = await response.text()
+			let res_array = res_text.split(",")
+			roomID = res_array[0]
+			ownerID = res_array[1]
+			console.log(roomID + ownerID)
 
 			displayRoomID(roomID)
 		}else{
