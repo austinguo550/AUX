@@ -95,11 +95,22 @@ var getSongs = function(req,res) {
 
 */
 
-var checkRoomExists = function(roomID) {
+router.get('/checkRoomExists/:roomID', function(req, res) {
+	console.log("in checkRoomExists backend");
 	//check if room id exists
+	roomID = req.params.roomID;
+	Room.count( { roomId: roomID }, function(err, count) {
+		console.log(count);
+		if(count > 0) {
+			console.log(count, " rooms with that ID: ", roomID);
+		}
+		else {
+			console.log("No room with that ID");
+			res.status(400).send("No room with that ID found");
+		}
+	})
 
-	//aka check if 
-}
+})
 
 
 module.exports = router;

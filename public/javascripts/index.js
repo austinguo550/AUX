@@ -94,9 +94,8 @@ async function chooseSong(song){
 async function checkRoomExists(roomID) {
 
 	try {
-      	const response = await fetch(mongobase + "checkRoomExists", {
+      const response = await fetch(mongobase + "checkRoomExists/" + roomID, {
         method: 'GET',
-        credentials: 'include',
         headers: { "Content-Type": "application/json" },
       });
       const status = response.status;
@@ -135,6 +134,8 @@ function(){
     		text = text.toLowerCase();
     		console.log(text);
     		roomID = text;
+
+        checkRoomExists(roomID);
     	})
 
 }
