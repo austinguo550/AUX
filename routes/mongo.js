@@ -17,19 +17,12 @@ router.post('/addSong', function(req, res){
 						return;
 					}
 				});
-				if (inQueue) {
-					console.log("inquee true")
-				}else {
-					console.log("inqueue false");
-				}
+
 				if (inQueue == false) {
-					console.log("swag");
 					Room.findOneAndUpdate( { roomId: roomId },
 						{$push: {'queue': incomingSongID}},
 						function(err) {
-							console.log(err);
 							if (err) {
-								console.log("err: ", err);
 								res.status(501).end("internal server error");
 								return;
 							}else {
@@ -38,7 +31,6 @@ router.post('/addSong', function(req, res){
 							}
 						}
 					)
-					console.log('function complete');
 				}				
 			})
 		}
@@ -50,33 +42,34 @@ router.post('/addSong', function(req, res){
 })
 
 router.post('/createRoom', function(req, res){
-	console.log("in backend")
-	appears = 1;
-	randomId = createRandomID();
-	// while (appears != 0) {
-	// 	console.log("counting rooms");
-	// 	Room.count( { roomId: randomId }, function(err, count) {
-	// 		if (err) {
-	// 			console.log("err: ", err);
-	// 		}
-	// 		console.log(count)
-	// 		if (count == 0) {
-	// 			appears = 0;
-	// 		}else{
-	// 			randomId = createRandomID();
-	// 		}
-	// 	});
-	// }
-	// console.log("abt to create Room")
 
-	Room.create( { roomId: randomId }, function(err) {
-		if (err) {
-			console.log("err creating room:", err);
-		} else {
-			res.status(200).send(randomId);
-		}
-	});
+	function findUsableRoomID() {
+		randomId = createRandomID();
+
+		Room.count( { roomId: randomId }, function(err, count) {
+			if (err) {
+				return res.status(500).end();
+			}
+
+			if (count == 0) {
+				Room.create( { roomId: randomId }, function(err) {
+					if (err) {
+						res.status(500).end();
+					} else {
+						res.status(200).end(randomId);
+					}
+				});
+			}else{
+				findUsableRoomID();
+			}
+		});
+	}
+
+	findUsableRoomID();
+
 })
+
+
 
 
 function createRandomID() {
