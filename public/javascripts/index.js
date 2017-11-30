@@ -1,5 +1,6 @@
 const spotifybase = "http://localhost:8080/spotify/";
 const mongobase = "http://localhost:8080/mongo/";
+const loginbase = "http://localhost:8080/login/";
 var roomID = "";
 var token = "";
 var userID = "";

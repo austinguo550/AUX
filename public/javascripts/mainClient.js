@@ -1,4 +1,5 @@
 var ownerID = ""
+var ACCESS_TOKEN = ""
 
 async function createRoom() {
 	// TODO:
@@ -18,12 +19,31 @@ async function createRoom() {
 			console.log(roomID + ownerID)
 
 			displayRoomID(roomID)
+
 		}else{
 			console.log("error: ", status)
 		}
 	    } catch(e) {
 	    	console.log("error: ", e);
     }
+}
+
+
+async function completeLogin() {
+  try {
+    const response = await fetch(loginbase + "getaccess", {
+      method: 'GET',
+    });
+    const status = response.status;
+    if (status >= 200 && status < 300) {
+      ACCESS_TOKEN = response.text();
+    } else {
+      console.log("error: ", status);
+    }
+  } catch (e) {
+    console.log("error: ", e);
+  }
+  
 }
 
 

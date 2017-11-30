@@ -6,6 +6,8 @@ var router = express.Router();
 
 var mongo = require('./mongo');
 
+var ACCESS_TOKEN = "";
+
 // Globals
 var redirect_uri = 'http://localhost:8080/login/callback';	// redirect response to /callback
 var scopes = 'user-read-private user-read-email';	// required for accessing private data
@@ -53,7 +55,6 @@ router.get('/start', function(req,res) {
 });
 
 
-
 /* Login response is rerouted here */
 // var callbackRoute = function(req, res) {
 router.get('/callback', function(req, res) {
@@ -93,6 +94,7 @@ router.get('/callback', function(req, res) {
 
         var access_token = body.access_token,
             refresh_token = body.refresh_token;
+        ACCESS_TOKEN = body.access_token;
         /* more response data:
         	token_type [str]: How the access token may be used: always "Bearer". 
         	scope [str]: A space-separated list of scopes which have been granted for this access_token
@@ -161,6 +163,12 @@ router.get('/refresh_token', function(req, res) {
       });
     }
   });
+});
+
+
+// return access token information to mainclient when they complete login
+router.get('/getaccess', function(req, res) {
+  res.send(200).end(ACCESS_TOKEN);
 });
 
 
