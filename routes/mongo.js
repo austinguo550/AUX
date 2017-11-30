@@ -43,6 +43,14 @@ router.post('/addSong', function(req, res){
 
 router.post('/createRoom', function(req, res){
 
+	function createRandomID() {
+		var possible = "abcdefghijklmnopqrstuvwxyz0123456789";
+		var randomId = "";
+		for (var i = 0; i < 6; i++)
+			randomId += possible.charAt(Math.floor(Math.random() * possible.length));
+		return randomId;
+	}
+
 	function findUsableRoomID() {
 		randomId = createRandomID();
 
@@ -72,14 +80,6 @@ router.post('/createRoom', function(req, res){
 
 
 
-function createRandomID() {
-	var possible = "abcdefghijklmnopqrstuvwxyz0123456789";
-	var randomId = "";
-	for (var i = 0; i < 6; i++)
-		randomId += possible.charAt(Math.floor(Math.random() * possible.length));
-	return randomId;
-}
-
 /*
 var getSongs = function(req,res) {
 	var roomID = req.roomID;
@@ -103,20 +103,17 @@ var getSongs = function(req,res) {
 */
 
 router.get('/checkRoomExists/:roomID', function(req, res) {
-	console.log("in checkRoomExists backend");
-	//check if room id exists
 	roomID = req.params.roomID;
+
 	Room.count( { roomId: roomID }, function(err, count) {
 		console.log(count);
 		if(count > 0) {
-			console.log(count, " rooms with that ID: ", roomID);
+			res.status(200).end("Room Found");
 		}
 		else {
-			console.log("No room with that ID");
-			res.status(400).send("No room with that ID found");
+			res.status(404).end("No room with that ID found");
 		}
 	})
-
 })
 
 

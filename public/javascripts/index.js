@@ -99,10 +99,9 @@ async function checkRoomExists(roomID) {
       });
       const status = response.status;
       if (status >= 200 && status < 300) {
-      	//no error
-      	console.log("success")
+      	document.getElementById('room-status').innerHTML = "Entered Room"
       }else{
-        console.log("error: ", status)
+      	document.getElementById('room-status').innerHTML = "Could not find Room"
       }
     } catch(e) {
       return {

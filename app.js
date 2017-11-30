@@ -44,9 +44,6 @@ app.use('/login', login.loginRoute);
 app.use('/callback', login.callbackRoute);
 app.use('/mongo', mongoRoute);
 
-// app.use('/mongo/addSong', mongo.addSong);
-// app.use('/mongo/createRoom', mongo.createRoom);
-
 
 // setup directory to grab cookies
 app.use(express.static(__dirname + '/public'))
