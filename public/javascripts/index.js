@@ -277,6 +277,6 @@ function(){
         checkRoomExists(roomID);
     	})
 
-    setInterval( function() { grabTokenPollDB(pollDB) }, 10000);
+    setInterval( function() { grabTokenPollDB(pollDB) }, 30000);
 
 }
