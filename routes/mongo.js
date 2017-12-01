@@ -79,11 +79,8 @@ router.post('/createRoom', function(req, res){
 })
 
 
-
-
-/*
-var getSongs = function(req,res) {
-	var roomID = req.roomID;
+router.post("/getSongs", function(req,res) {
+	var roomID = req.body.roomID;
 
 	Room.findOne({roomId: roomID}, function(err, room) {
 		if (err) {
@@ -92,16 +89,21 @@ var getSongs = function(req,res) {
 
 			songs = room.queue;
 			console.log(songs);
-			
-			res.status(200).send(songs);
+
 			Room.update(
-				{roomid: roomID}, 
-				{ $push: {queue: [] } });
+				{roomId: roomID}, 
+				{ $set: { queue: [] } }, function(err) {
+					if(err) {
+						console.log("ERROR: ", err)
+					} else {
+						res.status(200).send({songs: songs});
+					}
+				});
 		}
 	});
-}
+})
 
-*/
+
 
 router.get('/checkRoomExists/:roomID', function(req, res) {
 	roomID = req.params.roomID;

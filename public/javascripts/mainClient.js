@@ -8,6 +8,12 @@ async function createRoom() {
 	// TODO:
 	// check if user logged in
 	// if not, break out of function
+  if (oath && (!oath.access_token || oath.access_token.length <= 0)) {
+    console.log("Not logged in, cannot create room")
+    alert("Please log in to create a room")
+    return;
+  }
+
 	console.log("attempting to create room...")
 	try {
       	const response = await fetch(mongobase + "createRoom", {
@@ -22,6 +28,7 @@ async function createRoom() {
 			console.log(roomID + ownerID)
 
 			displayRoomID(roomID)
+
 		}else{
 			console.log("error: ", status)
 		}
@@ -51,6 +58,7 @@ async function createRoom() {
   oath.refresh_token = refresh_token;
 
   console.log(oath);
+  localStorage.setItem('access_token', access_token);
 
   if(error) {
     console.log("error with oath: ", error);
