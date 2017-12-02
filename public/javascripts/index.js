@@ -172,41 +172,38 @@ async function addSongsToPlaylist(songs) {
 
 async function addSongsToSpotifyPlaylist() {
   console.log("add songs to spotify playlist")
-	try {
 
-		const response = await fetch(mongobase + "getSongs", {
-			method: 'POST',
-			// credentials: 'include',
-    	headers: { "Content-Type": "application/json" },
-    	body: JSON.stringify({
-      	roomID: roomID
-      })
-		});
-		const status = response.status;
-		if (status >= 200 && status < 300) {
-			var json = await response.json()
-			console.log(json.songs)
+  if (!playlistID || playlistID == "") {  
+    // create playlist
+    grabUserID(null, createPlaylist)
+  }
+  else {
+    try {
 
-			//CALLS TO SPOTIFY PLAYLIST
+      const response = await fetch(mongobase + "getSongs", {
+        method: 'POST',
+        // credentials: 'include',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          roomID: roomID
+        })
+      });
+      const status = response.status;
+      if (status >= 200 && status < 300) {
+        var json = await response.json()
+        console.log(json.songs)
 
-			//check if playlist created already ?
-			if(playlistID && playlistID != "") {
-				//add to playlist
+        // add to playlist
         grabUserID(json.songs, addSongsToPlaylist)
-			}
 
-			else {
-				//create playlist
-        grabUserID(null, createPlaylist)
-				// createPlaylist();
-			}
+      }else{
+        console.log("error: ", status)
+      }
+    } catch(e) {
+      console.log("Error: " , e);
+    }
+  }
 
-		}else{
-			console.log("error: ", status)
-		}
-	} catch(e) {
-		console.log("Error: " , e);
-	}
 }
 
 async function pollDB() {
