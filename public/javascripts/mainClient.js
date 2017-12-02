@@ -57,7 +57,6 @@ async function createRoom() {
   oath.access_token = access_token;
   oath.refresh_token = refresh_token;
 
-  console.log(oath);
   localStorage.setItem('access_token', access_token);
 
   if(error) {
@@ -69,6 +68,7 @@ async function createRoom() {
 function displayRoomID(id) {
 	document.getElementById('roomID-header').innerHTML = id;
 }
+
 
 document.getElementById('createRoom-button').addEventListener('click', 
 	function() {

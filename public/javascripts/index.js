@@ -266,7 +266,8 @@ async function play() {
       'Authorization': 'Bearer ' + token
     },
     body: {
-      context_uri: "spotify:user:spotify:playlist:" + playlistID
+      context_uri: ":spotify:playlist:" + playlistID,
+      offset: {"position": 0},
     }
   });
 }
