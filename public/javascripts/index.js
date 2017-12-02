@@ -254,6 +254,27 @@ async function grabUserID(params, callback) {
 }
 
 
+async function play() {
+
+  if ((!roomID || roomID == "") || !((!token || token != "") && (!userID || userID != ""))) {
+    console.log("not main client");
+    return;
+  }
+
+  console.log("PLAY");
+
+  const response = await fetch("https://api.spotify.com/v1/me/player/play", {
+    method: 'PUT',
+    headers: {
+      'Authorization': 'Bearer ' + token
+    },
+    body: {
+      context_uri: "spotify:user:spotify:playlist:" + playlistID
+    }
+  });
+}
+
+
 window.onload =
 function(){
   	getClientCredentials();
@@ -276,6 +297,12 @@ function(){
 
         checkRoomExists(roomID);
     	})
+
+    document.getElementById('play').addEventListener('click', 
+      function() {
+        console.log("swiggity")
+        play();
+      })
 
     setInterval( function() { grabTokenPollDB(pollDB) }, 30000);
 
