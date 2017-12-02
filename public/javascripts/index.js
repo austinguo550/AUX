@@ -1,6 +1,10 @@
 const spotifybase = "http://localhost:8080/spotify/";
 const mongobase = "http://localhost:8080/mongo/";
+const loginbase = "http://localhost:8080/login/";
 var roomID = "";
+var token = "";
+var userID = "";
+var playlistID = "";
 
 async function searchSpotify(text){
 	if (text == "") {
@@ -68,7 +72,7 @@ async function chooseSong(song){
 	try {
       const response = await fetch(mongobase + "addSong", {
         method: 'POST',
-        credentials: 'include',
+        // credentials: 'include',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
         	roomID: roomID,
@@ -110,6 +114,165 @@ async function checkRoomExists(roomID) {
     }
 }
 
+async function createPlaylist(nullparam) {
+  if (nullparam) {
+    console.log("should have null argument");
+    return;
+  }
+  console.log("Create playlist")
+
+  var playlist_url = "https://api.spotify.com/v1/users/" + userID + "/playlists";
+  const create_response = await fetch(playlist_url, {
+    method: 'POST',
+    // credentials: 'include',
+    headers: {
+      'Accept': "application/json",
+      'Content-Type': "application/json",
+      'Authorization': "Bearer " + token
+    },
+    body: JSON.stringify({
+      "description": "AUX app playlist",
+      "public": false,
+      "name": "AUX-" + roomID
+    })
+  })
+
+  var playlist_json = await create_response.json();
+  console.log("Playlist ID ", playlist_json.id);
+  playlistID = playlist_json.id;
+
+  console.log("create playlist response status code: " + create_response.status);
+}
+
+async function addSongsToPlaylist(songs) {
+  console.log("add songs to playlist")
+
+  if (!songs || songs == "") {
+    console.log("no songs to add");
+    return;
+  }
+
+  for(var i = 0; i < songs.length; i++) {
+    songs[i] = "spotify:track:" + songs[i]
+  }
+
+  var songs_string = songs.join();
+  var playlist_url = "https://api.spotify.com/v1/users/" + userID + "/playlists/" + playlistID + "/tracks/?uris=" + songs_string;
+  const add_response = await fetch(playlist_url, {
+    method: 'POST',
+    // credentials: 'include',
+    headers: {
+      'Content-Type': "application/json",
+      'Authorization': "Bearer " + token
+    }
+  })
+
+  console.log("add to playlist response status code: " + add_response.status);
+}
+
+async function addSongsToSpotifyPlaylist() {
+  console.log("add songs to spotify playlist")
+
+  if (!playlistID || playlistID == "") {  
+    // create playlist
+    grabUserID(null, createPlaylist)
+  }
+  else {
+    try {
+
+      const response = await fetch(mongobase + "getSongs", {
+        method: 'POST',
+        // credentials: 'include',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          roomID: roomID
+        })
+      });
+      const status = response.status;
+      if (status >= 200 && status < 300) {
+        var json = await response.json()
+        console.log(json.songs)
+
+        // add to playlist
+        grabUserID(json.songs, addSongsToPlaylist)
+
+      }else{
+        console.log("error: ", status)
+      }
+    } catch(e) {
+      console.log("Error: " , e);
+    }
+  }
+
+}
+
+async function pollDB() {
+  if (roomID) {
+    addSongsToSpotifyPlaylist();
+  }
+}
+
+
+async function grabTokenPollDB(callback) {
+  token = localStorage.getItem('access_token');
+  callback();
+}
+
+async function grabUserID(params, callback) {
+  if (!token || token == "") {
+    console.log("No access token: can't grab user ID");
+    return;
+  }
+
+  console.log("grabbing user ID");
+  // use the access token to access the Spotify Web API
+
+  try {
+    const response = await fetch('https://api.spotify.com/v1/me', {
+      method: 'GET',
+      headers: { 'Authorization': 'Bearer ' + token },
+    });
+    if (response.status >= 200 && response.status < 300) {
+      const json = await response.json();
+      console.log("USER ID" + json.id);
+      userID = json.id;
+
+      // call callback function requiring userID
+      callback(params); 
+    } else {
+      console.log("error: ", response.status)
+    }
+    
+
+  } catch(e) {
+    console.log("Error: ", e);
+  }
+
+}
+
+
+async function play() {
+
+  if ((!roomID || roomID == "") || !((!token || token != "") && (!userID || userID != ""))) {
+    console.log("not main client");
+    return;
+  }
+
+  console.log("PLAY");
+
+  const response = await fetch("https://api.spotify.com/v1/me/player/play", {
+    method: 'PUT',
+    headers: {
+      'Authorization': 'Bearer ' + token
+    },
+    body: {
+      context_uri: ":spotify:playlist:" + playlistID,
+      offset: {"position": 0},
+    }
+  });
+}
+
+
 window.onload =
 function(){
   	getClientCredentials();
@@ -132,5 +295,13 @@ function(){
 
         checkRoomExists(roomID);
     	})
+
+    document.getElementById('play').addEventListener('click', 
+      function() {
+        console.log("swiggity")
+        play();
+      })
+
+    setInterval( function() { grabTokenPollDB(pollDB) }, 30000);
 
 }
