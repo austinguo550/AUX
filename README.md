@@ -24,16 +24,20 @@ aka:
 ```
 	- 1. Display Songs, make the STYLING LOOK NON SHITTY.  Put login button on top right.
 			- Henry & Jeffrey
-
-	- 1. Req to create and req to update playlist
-			- WILL
 	- 1. Req to start playing playlist
-			- WILL
+			- WILL & Austin
 	- 2. create a timer for a front-end fetch req to fetch songs from our db
-			- WILL
-	- 2. When user creates a room, randomly create a unique "owner ID".  This will be passed into the get Songs function to ensure the only person "getting songs" is the owner of the Room.
-		Assume everyone can make rooms for this function ATM.
-		 	- AUSTIN
+			- WILL & Austin
+	- 2. Check what the current state of the user's playback is.  And make necessary changes
+
+		- For instance: If user is on shuffle, turn shuffle off
+		etc.
+
+		Look at: https://developer.spotify.com/web-api/get-information-about-the-users-current-playback/
+
+		fore reference
+
+	- 2. Test Deploy on Heroku
 ```
 
 ## NOTES:
