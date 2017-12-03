@@ -1,14 +1,154 @@
-.input-container {
+* {
+	box-sizing: border-box;
+	font-family: 'Open Sans', sans-serif;
+}
+
+/*font-family: 'Roboto', sans-serif;
+font-family: 'Open Sans', sans-serif;*/
+
+button:hover, button:focus {
+	outline: 0px;
+	transform: scaleX(1.1) scaleY(1.1);
+	box-shadow: 5px 5px 15px #282828;
+}
+
+input:hover, input:focus {
+	outline: 0;
+}
+
+.song__input-container {
+	margin-top: 80px;
 	width: fit-content;
+	overflow: visible;
+	padding: 15px;
+	flex: 4;
+	align-self: center;
+}
+
+#song__search-input {
+	width: 300px;
+	height: 40px;	
+	padding-left: 5px;
+	border: 1px solid black;
+	box-shadow: 3px 3px 10px #282828;
+    font-size: 14px;
+}
+
+#song__search-button {
+	width: 55px;
+	height: 40px;
+	border: 0;
+	background-color: #db68ff;
+    font-size: 12px;
+}
+
+#song__mountpoint {
+	list-style-type: none;
+	margin:0;
+	padding:0;
+	list-style: none;
+	box-shadow: 3px 3px 10px #282828;
+}
+
+.song-item {
+    transition: 1s;
+    height: auto;
+}
+
+.song-item:hover {
+	color: gray;
+	background-color: #db68ff;
+}
+
+
+/***********/
+#header {
+	display: flex;
+}
+
+#header__cont {
+	flex: 20;
+	align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+h1, h2 {
+	margin: 0;
+}
+
+#login {
+	flex: 1;
+}
+
+/**********/
+
+#input-flex-container {
+	flex: 4;
+	margin-top: 40px;
+}
+
+#room-flex-container {
+	flex: 2;
+	align-items: center;
+}
+
+#createRoom-button {
+	width: 80px;
+	height: 60px;
+	border: 0;
+	background-color: #db68ff;
+    font-size: 12px;
+}
+
+.two-space {
+	flex: 2;
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+}
+
+#room-input-container {
+	flex: 2;
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+}
+
+#roomID-container {
 	overflow: hidden;
-	flex: 8;
+	width: fit-content;
 }
 
-.text-input {
-	width: 250px;
+#roomID-input {
+	width: 150px;
+	height: 30px;	
+	padding-left: 5px;
+	border: 1px solid black;
+	box-shadow: 3px 3px 10px #282828;
+    font-size: 10px;
 }
 
-#search-button {
+#roomID-button {
+	width: 60px;
+	height: 30px;
+	border: 0;
+	background-color: #db68ff;
+    font-size: 10px;
+}
+
+
+
+
+#play-cont{
+	flex: 5;
+}
+#play {
+	width: 40px;
+	height: 40px;
+	border: 0;
+	background-color: #db68ff;
+    font-size: 10px;
 }
 
 #room-status {
@@ -19,44 +159,26 @@
 	display: flex;
 }
 
-.two-space {
-	flex: 2;
-}
+
+
+
+
 
 #outer-flex-container {
 	flex-direction: column;
 }
 
-#input-flex-container {
-	flex: 4;
-}
 
-#room-flex-cnotainer {
-	flex: 3;
-}
 
-#mountpoint {
-	list-style-type: none;
-	margin:0;
-	padding:0;
-}
+
+
+
 
 .border {
 	border: 1px solid black;	
 }
 
-.song-item {
-    padding: 0px 0px 0px 8px;
-    transition: 1s;
-    height: auto;
-    background-color: lightgray;
-    border: 1px solid black;
-}
 
-.song-item:hover {
-	color: gray;
-	background-color: snow;
-}
 
 p {
 	margin: 5px;
