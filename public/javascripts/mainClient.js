@@ -169,6 +169,7 @@ async function addSongsToSpotifyPlaylist() {
 async function pollDB() {
   if (roomID) {
     addSongsToSpotifyPlaylist();
+    console.log("POLLING ID");
   }
 }
 
