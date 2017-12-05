@@ -15,7 +15,7 @@ const mongoose = require('mongoose');
 var app = express();
 
 var Room = require('./models/room');
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect(process.env.MONGODB_URI);
 mongoose.connection
   .once('open', function () {
     console.log('Mongoose successfully connected to Mongo')
