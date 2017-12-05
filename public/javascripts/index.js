@@ -3,7 +3,6 @@ const mongobase = "http://localhost:8080/mongo/";
 const loginbase = "http://localhost:8080/login/";
 var roomID = "";
 
-
 async function searchSpotify(text){
 	if (text == "") {
 		alert("please enter a query");
