@@ -169,7 +169,7 @@ async function addSongsToSpotifyPlaylist() {
 async function pollDB() {
   if (roomID) {
     addSongsToSpotifyPlaylist();
-    console.log("POLLING ID");
+    console.log("POLLING DB");
   }
 }
 
@@ -241,5 +241,6 @@ document.getElementById('play').addEventListener('click',
   })
 
 if (isLoggedIn) {
+	console.log("Expect call to poll DB");
   setInterval( function() { pollDB()}, 10000);
 }
