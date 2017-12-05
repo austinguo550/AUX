@@ -1,6 +1,7 @@
-const spotifybase = "http://localhost:8080/spotify/";
-const mongobase = "http://localhost:8080/mongo/";
-const loginbase = "http://localhost:8080/login/";
+const base_url = "http://passtheaux.herokuapp.com/"
+const spotifybase = base_url + "spotify/";
+const mongobase = base_url + "mongo/";
+const loginbase = base_url + "login/";
 var roomID = "";
 
 
