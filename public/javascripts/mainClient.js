@@ -240,7 +240,9 @@ document.getElementById('play').addEventListener('click',
     play();
   })
 
-if (isLoggedIn) {
-	console.log("Expect call to poll DB");
-  setInterval( function() { pollDB()}, 10000);
+document.onLoad = function() {
+	if (isLoggedIn) {
+		console.log("Expect call to poll DB");
+	  setInterval( function() { pollDB()}, 10000);
+	}
 }
