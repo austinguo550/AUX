@@ -29,7 +29,7 @@ async function createRoom() {
 			displayRoomID(roomID)
       triggerEnterRoom();
       isLoggedIn = 1;
-      		setInterval( function() { pollDB()}, 10000);
+      		setInterval( function() { pollDB()}, 1000);
 
 		}else{
 			console.log("error: ", status)
