@@ -9,8 +9,8 @@ var isLoggedIn = 0;
 
 async function createRoom() {
   if (oauth && (!oauth.access_token || oauth.access_token.length <= 0)) {
-    throw new Error("Not logged in, cannot create room")
     alert("Please log in to create a room")
+    throw new Error("Not logged in, cannot create room")
     return;
   }
 
