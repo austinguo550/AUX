@@ -39,7 +39,7 @@ function displayResults(array){
 		displayName = entry.display;
 
 		var songDiv = document.createElement('li');
-		songDiv.className = "song-item";
+		songDiv.className = "list-group-item";
 		songDiv.setAttribute('data-id', entry.id);
 
 		var songTitle = document.createElement('p');
@@ -101,9 +101,11 @@ async function checkRoomExists(roomID) {
       });
       const status = response.status;
       if (status >= 200 && status < 300) {
-      	document.getElementById('room-status').innerHTML = "Entered Room: " + roomID;
+      	//document.getElementById('room-status').innerHTML = "Entered Room: " + roomID;
+				document.getElementById('roomID-header').innerHTML = roomID;
       }else{
-      	document.getElementById('room-status').innerHTML = "Could not find Room"
+      	//document.getElementById('room-status').innerHTML = "Could not find Room"
+				document.getElementById('roomID-header').innerHTML = "Could not find Room"
       }
     } catch(e) {
       return {
@@ -116,7 +118,7 @@ async function checkRoomExists(roomID) {
 window.onload =
 function(){
   	getClientCredentials();
-    
+
     document.getElementById('song__search-button').addEventListener('click',
       function(){
       	var text = document.getElementById('song__search-input').value;
@@ -126,7 +128,7 @@ function(){
         })
      });
 
-    document.getElementById('roomID-button').addEventListener('click', 
+    document.getElementById('roomID-button').addEventListener('click',
     	function(){
     		var text = document.getElementById('roomID-input').value;
     		text = text.toLowerCase();
