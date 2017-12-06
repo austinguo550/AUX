@@ -215,12 +215,9 @@ h1, h2 {
 	flex-direction: column;
 }
 
-a:link, a:visited, a:hover, a:active {
+a:link, a:visited, a:hover, a:active, i {
 	color: black;
 }
-
-
-
 
 
 .border {
