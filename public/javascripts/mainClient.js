@@ -18,9 +18,10 @@ var span = document.getElementsByClassName("close")[0];
 
 var joinRoom = document.getElementById('joinRoom');
 
+
 // On window load, open the modal
 window.onload = function () {
-  if (window.location.href.indexOf("access_token") == -1) {
+  if (window.location.href.substring(window.location.href.indexOf("access_token")+13, window.location.href.indexOf("refresh_token")-1) != oauth.access_token) {
     modal.style.display = "block";
   }
   else {
