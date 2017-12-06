@@ -17,9 +17,20 @@
     <div id="myModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <p> Click here to DJ! </p>
-            <div id="login">
-                <a href="/start"><i class="fa fa-spotify fa-4x" aria-hidden="true"></i></a>
+            <div class="login-popup">
+                <h2>Create or Join a Room</h2>
+                <button onclick="window.location.href='/start'" class="button" href="/start">
+                    <h1>Create</h1>
+                    <div>
+                        <a href="/start"><i class="fa fa-spotify fa-4x" aria-hidden="true"></i></a>
+                    </div>
+                </button>
+                <button class="button" id="joinRoom">
+                    <h1>Join</h1>
+                    <div>
+                        <i class="fa fa-spotify fa-4x" aria-hidden="true"></i>
+                    </div>
+                </button>
             </div>
         </div>
     </div>
@@ -66,6 +77,14 @@
     <script src="/javascripts/mainClient.js"></script>
     <script src="/javascripts/trivial.js"></script>
 
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
 </body>

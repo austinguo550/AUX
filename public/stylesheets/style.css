@@ -173,16 +173,41 @@ h1, h2 {
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
+
 /* Modal Content/Box */
 .modal-content {
     background-color: #fefefe;
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
+    width: 20%; /* Could be more or less, depending on screen size */
 }
 
+.login-popup h2 {
+	text-align: center;
+	font-size: 28px;
+}
 
+.login-items div {
+	display: table;
+	margin: 15% auto;
+}
+
+.login-items h1 {
+	text-align: center;
+	width: 100%;
+}
+
+.login-item {
+	display: table-cell;
+}
+
+.button {
+	width: 100%;
+	display: block;
+	margin: 10px 0;
+    padding: 10px;
+}
 
 
 
@@ -190,7 +215,9 @@ h1, h2 {
 	flex-direction: column;
 }
 
-
+a:link, a:visited, a:hover, a:active {
+	color: black;
+}
 
 
 

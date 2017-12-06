@@ -16,6 +16,8 @@ var modal = document.getElementById('myModal');
 // Get <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
+var joinRoom = document.getElementById('joinRoom');
+
 // On window load, open the modal
 window.onload = function () {
   modal.style.display = "block";
@@ -29,10 +31,17 @@ span.onclick = function() {
 // When user clicks outside of modal, close it
 window.onclick = function(event) {
     if (event.target == modal) {
-        modal.style.display = "none";
+      modal.style.display = "none";
     }
 }
+
+joinRoom.onclick = function() {
+  modal.style.display = "none";
+}
+
 /* End Modal Box for DJ login */
+
+
 
 
 async function createRoom() {
