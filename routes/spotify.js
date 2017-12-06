@@ -46,7 +46,7 @@ router.use('/search/:trackName', function(req, res) {
     qs: {
       q: req.params.trackName,
       type: 'track,artist',
-      limit: '10',
+      limit: '8',
     },
   }, function(error, response, body) {
     if (!error && response.statusCode == 200) {
