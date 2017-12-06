@@ -18,7 +18,7 @@ input:hover, input:focus {
 
 .song__input-container {
 	margin-top: 80px;
-	width: fit-content;
+	width: 390px;
 	overflow: visible;
 	padding: 15px;
 	flex: 4;
