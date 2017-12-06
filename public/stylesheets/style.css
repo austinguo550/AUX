@@ -209,7 +209,9 @@ h1, h2 {
     padding: 10px;
 }
 
-
+input {
+	font-family: inherit;
+}
 
 #outer-flex-container {
 	flex-direction: column;

@@ -20,7 +20,12 @@ var joinRoom = document.getElementById('joinRoom');
 
 // On window load, open the modal
 window.onload = function () {
-  modal.style.display = "block";
+  if (window.location.href.indexOf("access_token") == -1) {
+    modal.style.display = "block";
+  }
+  else {
+    createRoom();
+  }
 }
 
 // When the user clicks on <span> (x), close the modal
