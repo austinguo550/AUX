@@ -18,7 +18,7 @@ async function createRoom() {
     window.location.href = 'start';
     //throw new Error("Not logged in, cannot create room")  // alert has to come before throw otherwise it won't alert
 //>>>>>>> 148bef926cdb1602825fc9afaabcf1484816c95c
-    return;
+    //return;
   }
 
 	try {
