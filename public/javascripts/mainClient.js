@@ -8,9 +8,11 @@ var playlistID = "";
 var isLoggedIn = 0;
 
 async function createRoom() {
+  console.log("create room main client");
   if (oauth && (!oauth.access_token || oauth.access_token.length <= 0)) {
-    throw new Error("Not logged in, cannot create room")
-    alert("Please log in to create a room")
+    //alert("Please log in to create a room")
+    window.location.href = loginbase + '/start';
+    //throw new Error("Not logged in, cannot create room")  // alert has to come before throw otherwise it won't alert
     return;
   }
 

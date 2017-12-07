@@ -1,6 +1,6 @@
 const spotifybase = "http://localhost:8080/spotify/";
 const mongobase = "http://localhost:8080/mongo/";
-const loginbase = "http://localhost:8080/login/";
+const loginbase = "http://localhost:8080"; // login is built into /routes/index.js
 var roomID = "";
 
 
