@@ -111,10 +111,10 @@ router.get('/checkRoomExists/:roomID', function(req, res) {
 	Room.count( { roomId: roomID }, function(err, count) {
 		console.log(count);
 		if(count > 0) {
-			res.status(200).end("Room Found");
+			res.status(200).send("Room Found");
 		}
 		else {
-			res.status(300).end("No room with that ID found");
+			res.status(404).send("No room with that ID found");
 		}
 	})
 })
