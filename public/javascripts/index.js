@@ -26,7 +26,7 @@ function getClientCredentials(){
 	}).then(function(response) {
 		return;
 	}).catch(function(err) {
-		alert("this shit could NOT get authenticated")
+		//alert("this shit could NOT get authenticated")
 		console.log("error", err)
 	})
 }
