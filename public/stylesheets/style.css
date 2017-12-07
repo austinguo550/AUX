@@ -68,17 +68,33 @@ h1, h2, h3, h4, h5 {
 	background-color: #1F1E1E;
 }
 
-.modal-body, .room-input {
+.modal-body, .room-input, .splash-input {
 	display: flex;
 	align-items: center;
+	flex-direction: row;
+	justify-content: space-between;
 }
 
 .close{
 	color: white;
 	outline-color: white;
 }
+/*
+a.btn-default.splash1, .btn-default.splash1, .btn-default.splash2 {
+	white-space: normal;
+	height: 10vh;
+	width: 10vh;
+}*/
 
+button.splash1, button.splash2 {
+	white-space: normal;
+	height: 10vh;
+	width: 10vh;
+}
 
+.splash-2 {
+	display: none;
+}
 
 
 

@@ -13,6 +13,12 @@
         <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
         <link rel="stylesheet" href="stylesheets/style.css">
         <script src="https://use.fontawesome.com/ca2aa0c186.js"></script>
+
+        <script type="text/javascript">
+            $(window).on('load',function(){
+                $('#splashModal').modal('show');
+            });
+        </script>
     </head>
 <body>
 
@@ -108,26 +114,30 @@
     </div>
 
     <!-- Create room button -->
-    <div class="row">
+    <!-- <div class="row">
       <div class="col-sm-2 col-sm-offset-5" align="center">
         <a href="/start" id="createRoom-button" class="btn btn-link">Create a room</a>
       </div>
-    </div>
+    </div> -->
 
 
     <!-- Join room button -->
-    <div class="row">
+    <!-- <div class="row">
       <div class="col-sm-2 col-sm-offset-5" align="center">
         <button class="btn btn-link" data-toggle="modal" data-target="#joinModal">Join a room</button>
       </div>
+    </div> -->
+
+    <div class="row">
+      <div class="col-sm-4 col-sm-offset-4" align="center">
+        <button class="btn btn-link" data-toggle="modal" data-target="#splashModal">Create or join another room</button>
+      </div>
     </div>
 
-
     <!-- Join room Modal -->
-    <div id="joinModal" class="modal fade" role="dialog">
+    <!-- <div id="joinModal" class="modal fade" role="dialog">
       <div class="modal-dialog modal-sm">
 
-        <!-- Modal content-->
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -138,11 +148,50 @@
 
               <input type="text" class="form-control text-input" id="roomID-input" type="text" placeholder="Input Room ID....">
               <br>
-              <!-- <p id="room-status"></p> -->
             </div>
           </div>
           <div class="modal-footer">
             <button id="roomID-button" type="button" class="btn btn-default" data-dismiss="modal">Enter Room ID</button>
+          </div>
+        </div>
+
+      </div>
+    </div> -->
+
+    <!-- Splash Modal -->
+    <div id="splashModal" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-sm">
+
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            <!-- display this first -->
+            <h4 class="modal-title splash-1" align="center">Create or Join a room</h4>
+
+            <!-- display when Join Room is pressed -->
+            <h4 class="modal-title splash-2" align="center">Join a room</h4>
+
+          </div>
+          <div class="modal-body">
+            <div class="container splash-input" id="splash-input-container">
+
+              <!-- display this first -->
+              <button id="createRoom-button" type="button" class="btn-success btn-default splash-1" data-dismiss="modal">Create Room</button>
+              <button type="button" class="btn btn-default splash-1 splash-button">Join Room</button>
+
+              <!-- display when Join Room is pressed -->
+              <input type="text" class="form-control text-input splash-2" id="roomID-input" type="text" placeholder="Input Room ID....">
+
+
+            </div>
+          </div>
+          <!-- display when Join Room is pressed -->
+          <div class="modal-footer splash-2">
+            <div class="splash-input">
+              <button type="button" class="btn-danger btn-default splash-2 splash-button">Go Back</button>
+              <button id="roomID-button" type="button" class="btn-success btn-default splash-2" data-dismiss="modal">Enter Room ID</button>
+            </div>
           </div>
         </div>
 
@@ -152,6 +201,18 @@
     <script src="/javascripts/index.js"></script>
     <script src="/javascripts/mainClient.js"></script>
     <script src="/javascripts/trivial.js"></script>
+
+    <script type="text/javascript">
+    $('.splash-button').on('click',function(){
+        if($('.splash-1').css('display')!='none'){
+            $('.splash-2').show();
+            $('.splash-1').hide();
+        }else if($('.splash-2').css('display')!='none'){
+            $('.splash-1').show();
+            $('.splash-2').hide();
+        }
+    });
+    </script>
 
 
 </body>
