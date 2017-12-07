@@ -115,7 +115,7 @@ async function createPlaylist(nullparam) {
 }
 
 async function addSongsToPlaylist(songs) {
-  if (!songs || songs == "" || songs.length = 0) {
+  if (!songs || songs == "" || songs.length == 0) {
     throw new Error("no songs")
     return;
   }
@@ -198,7 +198,6 @@ async function grabUserID(params, callback) {
       userID = json.id;
 
       //if(!playlistID || playlistID == "") {
-	      console.log("CREATING PLAYLIST");
 	      callback(params); 
 	  //}
 	  // else {
