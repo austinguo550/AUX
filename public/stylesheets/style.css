@@ -1,12 +1,109 @@
 * {
-	box-sizing: border-box;
+	/*box-sizing: border-box;*/
 	font-family: 'Open Sans', sans-serif;
 }
+
+.list-group-item:hover {
+	color: gray;
+	background-color: #f1f1f1;
+}
+
+.title div {
+  height: 30vh; /* 30% of viewport height*/
+}
+
+.container {
+	padding-top: 1vh;
+	padding-bottom: 1vh;
+}
+
+img {
+		display: flex;
+    max-height: 100%;
+    max-width: 100%;
+		margin-left: auto;
+    margin-right: auto;
+}
+
+p {
+	display: flex;
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+.well {
+	display: block;
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
+button {
+	display: block;
+	margin-top: auto;
+	margin-bottom: auto;
+}
+body{
+	background-color: #1F1E1E;
+}
+
+h1, h2, h3, h4, h5 {
+	color: white;
+}
+
+.btn-link {
+	color: white;
+}
+
+.table-row {
+	display: flex;
+	align-items: center;
+}
+
+.table-row [class^="col-"] {
+
+}
+
+.modal-content {
+	border-color: white;
+	background-color: #1F1E1E;
+}
+
+.modal-body, .room-input, .splash-input {
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.close{
+	color: white;
+	outline-color: white;
+}
+/*
+a.btn-default.splash1, .btn-default.splash1, .btn-default.splash2 {
+	white-space: normal;
+	height: 10vh;
+	width: 10vh;
+}*/
+
+button.splash1, button.splash2 {
+	white-space: normal;
+	height: 10vh;
+	width: 10vh;
+}
+
+.splash-2 {
+	display: none;
+}
+
+
+
+/* OLD CSS */
 
 /*font-family: 'Roboto', sans-serif;
 font-family: 'Open Sans', sans-serif;*/
 
-button:hover, button:focus {
+/*button:hover, button:focus {
 	outline: 0px;
 	transform: scaleX(1.1) scaleY(1.1);
 	box-shadow: 5px 5px 15px #282828;
@@ -14,43 +111,43 @@ button:hover, button:focus {
 
 input:hover, input:focus {
 	outline: 0;
-}
+}*/
 
-.song__input-container {
+/*.song__input-container {
 	margin-top: 80px;
 	width: fit-content;
 	overflow: visible;
 	padding: 15px;
 	flex: 4;
 	align-self: center;
-}
+}*/
 
-#song__search-input {
+/*#song__search-input {
 	width: 300px;
-	height: 40px;	
+	height: 40px;
 	padding-left: 5px;
 	border: 1px solid black;
 	box-shadow: 3px 3px 10px #282828;
     font-size: 14px;
-}
+}*/
 
-#song__search-button {
+/*#song__search-button {
 	width: 55px;
 	height: 40px;
 	border: 0;
 	background-color: #db68ff;
     font-size: 12px;
-}
+}*/
 
-#song__mountpoint {
+/*#song__mountpoint {
 	list-style-type: none;
 	margin:0;
 	padding:0;
 	list-style: none;
 	box-shadow: 3px 3px 10px #282828;
-}
+}*/
 
-.song-item {
+/*.song-item {
     transition: 1s;
     height: auto;
 }
@@ -58,11 +155,11 @@ input:hover, input:focus {
 .song-item:hover {
 	color: gray;
 	background-color: #db68ff;
-}
+}*/
 
 
 /***********/
-#header {
+/*#header {
 	display: flex;
 }
 
@@ -79,11 +176,11 @@ h1, h2 {
 
 #login {
 	flex: 1;
-}
+}*/
 
 /**********/
 
-#input-flex-container {
+/*#input-flex-container {
 	flex: 4;
 	margin-top: 40px;
 }
@@ -91,16 +188,16 @@ h1, h2 {
 #room-flex-container {
 	flex: 2;
 	align-items: center;
-}
+}*/
 
-#createRoom-button {
+/*#createRoom-button {
 	width: 80px;
 	height: 60px;
 	border: 0;
 	background-color: #db68ff;
     font-size: 12px;
-}
-
+}*/
+/*
 .two-space {
 	flex: 2;
 	align-items: center;
@@ -122,7 +219,7 @@ h1, h2 {
 
 #roomID-input {
 	width: 150px;
-	height: 30px;	
+	height: 30px;
 	padding-left: 5px;
 	border: 1px solid black;
 	box-shadow: 3px 3px 10px #282828;
@@ -135,12 +232,12 @@ h1, h2 {
 	border: 0;
 	background-color: #db68ff;
     font-size: 10px;
-}
+}*/
 
 
 
 
-#play-cont{
+/*#play-cont{
 	flex: 5;
 }
 #play {
@@ -149,10 +246,10 @@ h1, h2 {
 	border: 0;
 	background-color: #db68ff;
     font-size: 10px;
-}
+}*/
 
-#room-status {
-	
+/*#room-status {
+
 }
 
 .flex-container {
@@ -175,11 +272,11 @@ h1, h2 {
 
 
 .border {
-	border: 1px solid black;	
-}
+	border: 1px solid black;
+}*/
 
 
 
-p {
+/*p {
 	margin: 5px;
-}
+}*/
