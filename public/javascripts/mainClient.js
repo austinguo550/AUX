@@ -115,7 +115,7 @@ async function createPlaylist(nullparam) {
 }
 
 async function addSongsToPlaylist(songs) {
-  if (!songs || songs == "") {
+  if (!songs || songs == "" || songs.length = 0) {
     throw new Error("no songs")
     return;
   }
