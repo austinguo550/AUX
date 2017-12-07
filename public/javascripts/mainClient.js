@@ -201,9 +201,9 @@ async function grabUserID(params, callback) {
 	      console.log("CREATING PLAYLIST");
 	      callback(params); 
 	  //}
-	  else {
-	  	console.log("error: ", response.status);
-	  }
+	  // else {
+	  // 	console.log("error: ", response.status);
+	  // }
     } else {
       console.log("error: ", response.status);
     }
