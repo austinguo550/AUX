@@ -1,4 +1,4 @@
-const base_url = "http://passtheaux.herokuapp.com/"
+const base_url = "http://passtheaux.party/"
 const spotifybase = base_url + "spotify/";
 const mongobase = base_url + "mongo/";
 const loginbase = base_url + "login/";
