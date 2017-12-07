@@ -93,6 +93,7 @@ async function chooseSong(song){
 }
 
 async function checkRoomExists(roomID) {
+  var splashModal = document.getElementById('splashModal');
 
 	try {
       const response = await fetch(mongobase + "checkRoomExists/" + roomID, {
@@ -102,13 +103,13 @@ async function checkRoomExists(roomID) {
       const status = response.status;
       if (status >= 200 && status < 300) {
 				document.getElementById('roomID-header').innerHTML = roomID;
+        splashModal.className = "modal fade";
       }else{
 				document.getElementById('roomID-header').innerHTML = "Could not find Room"
-        // var splashModal = document.getElementById('splashModal');
-        // splashModal.className += " in";
-        // setTimeout(function() {splashModal.style.display = 'block'}, 1000);
-        // document.getElementById('roomID-input').value = "";
-        // roomID = "";
+        splashModal.className += " in";
+        setTimeout(function() {splashModal.style.display = 'block'}, 1000);
+        document.getElementById('roomID-input').value = "";
+        roomID = "";
       }
     } catch(e) {
       return {
