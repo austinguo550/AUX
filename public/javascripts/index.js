@@ -27,7 +27,6 @@ function getClientCredentials(){
 		return;
 	}).catch(function(err) {
 		//alert("this shit could NOT get authenticated")
-		console.log("error", err)
 	})
 }
 
@@ -81,12 +80,9 @@ async function chooseSong(song){
       const status = response.status;
       const text = await response.text()
       if (status >= 200 && status < 300) {
-      	console.log(text);
       	var mountpoint = document.getElementById('song__mountpoint');
       	mountpoint.innerHTML = "";
       	return;
-      }else{
-        console.log("error: ", text)
       }
     } catch(e) {
       return {
