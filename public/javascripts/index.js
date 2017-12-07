@@ -101,11 +101,14 @@ async function checkRoomExists(roomID) {
       });
       const status = response.status;
       if (status >= 200 && status < 300) {
-      	//document.getElementById('room-status').innerHTML = "Entered Room: " + roomID;
 				document.getElementById('roomID-header').innerHTML = roomID;
       }else{
-      	//document.getElementById('room-status').innerHTML = "Could not find Room"
 				document.getElementById('roomID-header').innerHTML = "Could not find Room"
+        var splashModal = document.getElementById('splashModal');
+        splashModal.className += " in";
+        setTimeout(function() {splashModal.style.display = 'block'}, 1000);
+        document.getElementById('roomID-input').value = "";
+        roomID = "";
       }
     } catch(e) {
       return {
