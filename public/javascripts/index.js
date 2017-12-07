@@ -2,8 +2,8 @@ const base_url = "http://passtheaux.herokuapp.com/"
 const spotifybase = base_url + "spotify/";
 const mongobase = base_url + "mongo/";
 const loginbase = base_url + "login/";
-var roomID = "";
 
+var roomID = "";
 
 async function searchSpotify(text){
 	if (text == "") {
@@ -40,7 +40,7 @@ function displayResults(array){
 		displayName = entry.display;
 
 		var songDiv = document.createElement('li');
-		songDiv.className = "song-item";
+		songDiv.className = "list-group-item";
 		songDiv.setAttribute('data-id', entry.id);
 
 		var songTitle = document.createElement('p');
@@ -94,6 +94,7 @@ async function chooseSong(song){
 }
 
 async function checkRoomExists(roomID) {
+  var splashModal = document.getElementById('splashModal');
 
 	try {
       const response = await fetch(mongobase + "checkRoomExists/" + roomID, {
@@ -102,9 +103,14 @@ async function checkRoomExists(roomID) {
       });
       const status = response.status;
       if (status >= 200 && status < 300) {
-      	document.getElementById('room-status').innerHTML = "Entered Room: " + roomID;
+				document.getElementById('roomID-header').innerHTML = roomID;
+        splashModal.className = "modal fade";
       }else{
-      	document.getElementById('room-status').innerHTML = "Could not find Room"
+				document.getElementById('roomID-header').innerHTML = "Could not find Room"
+        splashModal.className += " in";
+        setTimeout(function() {splashModal.style.display = 'block'}, 1000);
+        document.getElementById('roomID-input').value = "";
+        roomID = "";
       }
     } catch(e) {
       return {
@@ -117,7 +123,7 @@ async function checkRoomExists(roomID) {
 window.onload =
 function(){
   	getClientCredentials();
-    
+
     document.getElementById('song__search-button').addEventListener('click',
       function(){
       	var text = document.getElementById('song__search-input').value;
@@ -127,7 +133,7 @@ function(){
         })
      });
 
-    document.getElementById('roomID-button').addEventListener('click', 
+    document.getElementById('roomID-button').addEventListener('click',
     	function(){
     		var text = document.getElementById('roomID-input').value;
     		text = text.toLowerCase();

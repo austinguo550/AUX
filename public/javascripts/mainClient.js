@@ -7,10 +7,45 @@ var userID = "";
 var playlistID = "";
 var isLoggedIn = 0;
 
+
+
+/* Modal Box for DJ login */ 
+// Get the modal
+var modal = document.getElementById('myModal');
+
+// Get <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// On window load, open the modal
+window.onload = function () {
+  modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+// When user clicks outside of modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+/* End Modal Box for DJ login */
+
+
 async function createRoom() {
+  console.log("create room main client");
   if (oauth && (!oauth.access_token || oauth.access_token.length <= 0)) {
-    alert("Please log in to create a room")
-    throw new Error("Not logged in, cannot create room")
+// <<<<<<< HEAD
+//     alert("Please log in to create a room")
+//     throw new Error("Not logged in, cannot create room")
+// =======
+    //alert("Please log in to create a room")
+    window.location.href = loginbase + '/start';
+    //throw new Error("Not logged in, cannot create room")  // alert has to come before throw otherwise it won't alert
+//>>>>>>> 148bef926cdb1602825fc9afaabcf1484816c95c
     return;
   }
 
@@ -240,3 +275,10 @@ document.getElementById('play').addEventListener('click',
   function() {
     play();
   })
+// <<<<<<< HEAD
+// =======
+
+// if (isLoggedIn) {
+//   setInterval( function() { pollDB()}, 10000);
+// }
+// >>>>>>> 148bef926cdb1602825fc9afaabcf1484816c95c
