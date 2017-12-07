@@ -2,70 +2,202 @@
 
 <html>
     <head>
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
         <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
         <link rel="stylesheet" href="stylesheets/style.css">
         <script src="https://use.fontawesome.com/ca2aa0c186.js"></script>
+
+        <script type="text/javascript">
+            $(window).on('load',function(){
+                $('#splashModal').modal('show');
+            });
+        </script>
     </head>
 <body>
-    <div id="header">
-        <div id="header__cont">
-            <h1 id="header__title">AUX</h1>
-            <h2 id="header__subtitle">a collaborative song queueing app</h2>
+
+  <!-- Logo -->
+  <div class="container title">
+    <div class="row">
+      <div class="col-sm-4 col-sm-offset-4">
+
+        <img src="../assets/aux_logo.png" alt="AUX - a collaborative song queuing app"></img>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="flex-container" id="outer-flex-container">
+      <div class="flex-container" id="input-flex-container">
+
+          <div class="flex-container" id="room-flex-container">
+              <button id="createRoom-button">Create Room</button>
+          </div>
+
+          <div class="two-space">
+              <div id="roomID-container">
+                  <h3>Your Room ID</h3>
+                  <p id=roomID-header>N/A</p>
+              </div>
+          </div>
+
+          <div class="input-container" id="room-input-container">
+              <input class="text-input" id="roomID-input" type="text" placeholder="Input Room ID....">
+              <br>
+              <button id="roomID-button">Enter Room ID</button>
+              <p id="room-status"></p>
+          </div>
+
+      </div>
+
+    </div> -->
+
+    <!-- Room ID display and Play button -->
+    <div class="container">
+      <div class="row table-row">
+        <div class="col-sm-1 col-sm-offset-3">
+          <h5>Room ID:</h5>
         </div>
+        <div class="col-sm-4">
+          <div class="well well-sm" id="roomID-header">N/A</div>
+        </div>
+        <div class="col-sm-1" id="play-cont">
+          <button id="play" class="btn-success btn-md">Play</button>
+        </div>
+      </div>
     </div>
 
-    <div id="myModal" class="modal">
+
+
+    <!-- search bar -->
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 col-sm-offset-2"><!--width is set by this div -->
+
+          <div class="input-group">
+
+            <span class="input-group-addon"><i class="glyphicon glyphicon-music"></i></span>
+            <input type="text" class="form-control" id="song__search-input" name="msg" placeholder="Search for a song...">
+
+            <div class="input-group-btn">
+              <button class="btn btn-default" id="song__search-button">
+                <i class="glyphicon glyphicon-search"></i>
+              </button>
+            </div>
+
+          </div>
+          <ul id="song__mountpoint" class="list-group"></ul>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Create room button -->
+    <!-- <div class="row">
+      <div class="col-sm-2 col-sm-offset-5" align="center">
+        <a href="/start" id="createRoom-button" class="btn btn-link">Create a room</a>
+      </div>
+    </div> -->
+
+
+    <!-- Join room button -->
+    <!-- <div class="row">
+      <div class="col-sm-2 col-sm-offset-5" align="center">
+        <button class="btn btn-link" data-toggle="modal" data-target="#joinModal">Join a room</button>
+      </div>
+    </div> -->
+
+    <div class="row">
+      <div class="col-sm-4 col-sm-offset-4" align="center">
+        <button class="btn btn-link" data-toggle="modal" data-target="#splashModal">Create or join another room</button>
+      </div>
+    </div>
+
+    <!-- Join room Modal -->
+    <!-- <div id="joinModal" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-sm">
+
         <div class="modal-content">
-            <span class="close">&times;</span>
-            <p> Click here to DJ! </p>
-            <div id="login">
-                <a href="/start"><i class="fa fa-spotify fa-4x" aria-hidden="true"></i></a>
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title" align="center">Join a room</h4>
+          </div>
+          <div class="modal-body">
+            <div class="container room-input" id="room-input-container">
+
+              <input type="text" class="form-control text-input" id="roomID-input" type="text" placeholder="Input Room ID....">
+              <br>
             </div>
+          </div>
+          <div class="modal-footer">
+            <button id="roomID-button" type="button" class="btn btn-default" data-dismiss="modal">Enter Room ID</button>
+          </div>
         </div>
+
+      </div>
+    </div> -->
+
+    <!-- Splash Modal -->
+    <div id="splashModal" class="modal fade" role="dialog">
+      <div class="modal-dialog modal-sm">
+
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+            <!-- display this first -->
+            <h4 class="modal-title splash-1" align="center">Create or Join a room</h4>
+
+            <!-- display when Join Room is pressed -->
+            <h4 class="modal-title splash-2" align="center">Join a room</h4>
+
+          </div>
+          <div class="modal-body">
+            <div class="container splash-input" id="splash-input-container">
+
+              <!-- display this first -->
+              <button id="createRoom-button" type="button" class="btn-success btn-default splash-1" data-dismiss="modal">Create Room</button>
+              <button type="button" class="btn btn-default splash-1 splash-button">Join Room</button>
+
+              <!-- display when Join Room is pressed -->
+              <input type="text" class="form-control text-input splash-2" id="roomID-input" type="text" placeholder="Input Room ID....">
+
+
+            </div>
+          </div>
+          <!-- display when Join Room is pressed -->
+          <div class="modal-footer splash-2">
+            <div class="splash-input">
+              <button type="button" class="btn-danger btn-default splash-2 splash-button">Go Back</button>
+              <button id="roomID-button" type="button" class="btn-success btn-default splash-2" data-dismiss="modal">Enter Room ID</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
-
-    <div class="flex-container" id="outer-flex-container">
-        <div class="flex-container" id="input-flex-container">
-
-            <div class="flex-container" id="room-flex-container">
-                <button id="createRoom-button">Create Room</button>
-            </div>
-
-            <div class="two-space">
-                <div id="roomID-container">
-                    <h3>Your Room ID</h3>
-                    <p id=roomID-header>N/A</p>
-                </div>    
-            </div>
-
-            <div class="input-container" id="room-input-container">
-                <input class="text-input" id="roomID-input" type="text" placeholder="Input Room ID....">
-                <br>
-                <button id="roomID-button">Enter Room ID</button>
-                <p id="room-status"></p>
-            </div>     
-
-        </div>
-        
-
-        <div class="song__input-container">
-            <input class="text-input" id = "song__search-input" type="text" placeholder="Search for a song...">
-            <button id="song__search-button">Search</button>
-            <ul id="song__mountpoint"></ul>
-        </div>
-
-
-        <div class="flex-container" id="play-cont">
-            <button id="play">Play</button>
-        </div>
-     
-    </div>
-
 
     <script src="/javascripts/index.js"></script>
     <script src="/javascripts/mainClient.js"></script>
     <script src="/javascripts/trivial.js"></script>
 
+    <script type="text/javascript">
+    $('.splash-button').on('click',function(){
+        if($('.splash-1').css('display')!='none'){
+            $('.splash-2').show();
+            $('.splash-1').hide();
+        }else if($('.splash-2').css('display')!='none'){
+            $('.splash-1').show();
+            $('.splash-2').hide();
+        }
+    });
+    </script>
 
 
 </body>
