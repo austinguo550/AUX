@@ -82,6 +82,7 @@ async function chooseSong(song){
       const text = await response.text()
       if (status >= 200 && status < 300) {
       	console.log(text);
+      	mountpoint.innerHTML = "";
       	return;
       }else{
         console.log("error: ", text)
