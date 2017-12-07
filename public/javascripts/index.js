@@ -103,6 +103,7 @@ async function checkRoomExists(roomID) {
       });
       const status = response.status;
       if (status >= 200 && status < 300) {
+      	splashModal.style.display = 'none';
 				document.getElementById('roomID-header').innerHTML = roomID;
         splashModal.className = "modal fade";
       }else{
