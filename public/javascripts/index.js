@@ -104,11 +104,11 @@ async function checkRoomExists(roomID) {
 				document.getElementById('roomID-header').innerHTML = roomID;
       }else{
 				document.getElementById('roomID-header').innerHTML = "Could not find Room"
-        var splashModal = document.getElementById('splashModal');
-        splashModal.className += " in";
-        setTimeout(function() {splashModal.style.display = 'block'}, 1000);
-        document.getElementById('roomID-input').value = "";
-        roomID = "";
+        // var splashModal = document.getElementById('splashModal');
+        // splashModal.className += " in";
+        // setTimeout(function() {splashModal.style.display = 'block'}, 1000);
+        // document.getElementById('roomID-input').value = "";
+        // roomID = "";
       }
     } catch(e) {
       return {
