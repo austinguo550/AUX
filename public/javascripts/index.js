@@ -113,9 +113,9 @@ async function checkRoomExists(roomID) {
         roomID = "";
       }
     } catch(e) {
-      return {
-        err: e.message,
-      };
+      // return {
+      //   err: e.message,
+      // };
     }
 }
 
