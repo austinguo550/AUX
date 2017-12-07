@@ -24,7 +24,7 @@ var cookieParser = require('cookie-parser');
 
 var client_id = 'a9fce766bc2b4d86af725fad719c8fe6'; // Your client id
 var client_secret = 'bb6d24a85a384173959534c464a944c5'; // Your secret
-var redirect_uri = 'http://passtheaux.herokuapp.com/callback'; // Your redirect uri
+var redirect_uri = 'http://passtheaux.party/callback'; // Your redirect uri
 
 /**
  * Generates a random string containing numbers and letters
