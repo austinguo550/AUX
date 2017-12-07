@@ -197,7 +197,7 @@ async function grabUserID(params, callback) {
       const json = await response.json();
       userID = json.id;
 
-      if(playlistID && playlistID != "") {
+      if(!playlistID || playlistID == "") {
 	      console.log("CREATING PLAYLIST");
 	      callback(params); 
 	  }
