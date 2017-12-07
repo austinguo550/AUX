@@ -114,7 +114,7 @@ router.get('/checkRoomExists/:roomID', function(req, res) {
 			res.status(200).end("Room Found");
 		}
 		else {
-			res.status(404).end("No room with that ID found");
+			res.status(400).end("No room with that ID found");
 		}
 	})
 })
