@@ -38,7 +38,8 @@ async function createRoom() {
 	      isLoggedIn = 1;
       		setInterval( function() { 
       			checkRoomExists(roomID);
-      			setTimeout(pollDB(), 1000);
+      			setTimeout( () => {
+      				pollDB()}, 1000);
       		}, 1000);
 
 		}else{
