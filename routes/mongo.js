@@ -81,26 +81,33 @@ router.post('/createRoom', function(req, res){
 
 router.post("/getSongs", function(req,res) {
 	var roomID = req.body.roomID;
+	Room.count( { roomId: roomId }, function(err, count) {
+		if(count > 0) {
+			Room.findOne({roomId: roomID}, function(err, room) {
+				if (err) {
+					res.status(400).send('Bad Request');
+				} else {
 
-	Room.findOne({roomId: roomID}, function(err, room) {
-		if (err) {
-			res.status(400).send('Bad Request');
-		} else {
+					songs = room.queue;
+					console.log(songs);
 
-			songs = room.queue;
-			console.log(songs);
-
-			Room.update(
-				{roomId: roomID}, 
-				{ $set: { queue: [] } }, function(err) {
-					if(err) {
-						console.log("ERROR: ", err)
-					} else {
-						res.status(200).send({songs: songs});
-					}
-				});
+					Room.update(
+						{roomId: roomID}, 
+						{ $set: { queue: [] } }, function(err) {
+							if(err) {
+								console.log("ERROR: ", err)
+							} else {
+								res.status(200).send({songs: songs});
+							}
+						});
+				}
+			});
 		}
-	});
+		else {
+			res.status(400).end("Room ID not Found");
+			return;
+		}
+	})
 })
 
 
