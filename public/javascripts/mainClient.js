@@ -34,9 +34,12 @@ async function createRoom() {
 			ownerID = res_array[1]
 
 			displayRoomID(roomID)
-      triggerEnterRoom();
-      isLoggedIn = 1;
-      		setInterval( function() { pollDB()}, 1000);
+	      triggerEnterRoom();
+	      isLoggedIn = 1;
+      		setInterval( function() { 
+      			checkRoomExists(roomID);
+      			setTimeout(pollDB(), 1000);
+      		}, 1000);
 
 		}else{
 			console.log("error: ", status)
@@ -252,10 +255,3 @@ document.getElementById('play').addEventListener('click',
   function() {
     play();
   })
-// <<<<<<< HEAD
-// =======
-
-// if (isLoggedIn) {
-//   setInterval( function() { pollDB()}, 10000);
-// }
-// >>>>>>> 148bef926cdb1602825fc9afaabcf1484816c95c
